@@ -1,0 +1,543 @@
+/**
+ * FARIAS KLUG ADVOCACIA - COMPONENTS CSS (TAILWIND 4)
+ * ===========================================================
+ *
+ * Componentes reutilizáveis seguindo o design system da marca.
+ * Inclui: botões, cards, navegação, formulários e elementos específicos.
+ *
+ * @author: https://github.com/rafactx
+ * @version: 1.0.2 - FINAL CORRIGIDO
+ * @description: Biblioteca de componentes premium para interface jurídica
+ */
+
+/* ==========================================================================
+   SISTEMA DE BOTÕES LEGADO (para compatibilidade)
+   ========================================================================== */
+
+   @layer components {
+    /* === BOTÃO LEGADO === */
+    .btn {
+      @apply inline-flex items-center justify-center gap-2 px-6 py-3
+             border-0 rounded-full font-sans font-semibold text-base leading-none
+             no-underline cursor-pointer transition-all duration-300
+             relative overflow-hidden;
+    }
+
+    .btn::before {
+      content: '';
+      @apply absolute top-0 w-full h-full transition-all duration-500;
+      left: -100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    /* === VARIAÇÕES LEGADAS === */
+    .btn-primary {
+      @apply btn text-white;
+      background-color: theme(colors.brand-terracotta-600);
+      box-shadow: theme(shadow-brand-soft);
+    }
+
+    .btn-primary:hover {
+      background-color: theme(colors.brand-terracotta-700);
+      @apply -translate-y-0.5;
+      box-shadow: theme(shadow-brand-medium);
+    }
+
+    .btn-secondary {
+      @apply btn text-white;
+      background-color: theme(colors.brand-dark-green-900);
+      box-shadow: theme(shadow-brand-soft);
+    }
+
+    .btn-secondary:hover {
+      background-color: theme(colors.brand-dark-green-800);
+      @apply -translate-y-0.5;
+      box-shadow: theme(shadow-brand-medium);
+    }
+
+    .btn-outline {
+      @apply btn bg-transparent border-2;
+      color: theme(colors.brand-terracotta-600);
+      border-color: theme(colors.brand-terracotta-600);
+    }
+
+    .btn-outline:hover {
+      background-color: theme(colors.brand-terracotta-600);
+      @apply text-white -translate-y-0.5;
+    }
+
+    .btn-ghost {
+      @apply btn bg-transparent border-2 border-transparent;
+      color: theme(colors.brand-dark-green-900);
+    }
+
+    .btn-ghost:hover {
+      background-color: theme(colors.brand-dark-green-50);
+      border-color: theme(colors.brand-dark-green-900);
+    }
+
+    /* === TAMANHOS LEGADOS === */
+    .btn-sm {
+      @apply px-4 py-2 text-sm;
+    }
+
+    .btn-lg {
+      @apply px-8 py-4 text-lg;
+    }
+
+    .btn-xl {
+      @apply px-12 py-6 text-xl;
+    }
+  }
+
+  /* ==========================================================================
+     SISTEMA DE CARDS LEGADO
+     ========================================================================== */
+
+  @layer components {
+    /* === CARD BASE === */
+    .card {
+      @apply bg-white/95 rounded-2xl overflow-hidden transition-all duration-300
+             border border-white/20;
+      box-shadow: theme(shadow);
+    }
+
+    .card:hover {
+      @apply -translate-y-1;
+      box-shadow: theme(shadow-brand-strong);
+    }
+
+    /* === ELEMENTOS DO CARD === */
+    .card-header {
+      @apply p-6;
+      border-bottom: 1px solid theme(colors.brand-paper-400);
+    }
+
+    .card-body {
+      @apply p-6;
+    }
+
+    .card-footer {
+      @apply p-6;
+      border-top: 1px solid theme(colors.brand-paper-400);
+      background-color: theme(colors.brand-beige-400 / 0.3);
+    }
+
+    /* === VARIAÇÕES DE CARDS === */
+    .card-service {
+      @apply relative;
+      background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.95) 0%,
+        theme(colors.brand-beige-400 / 0.1) 100%);
+    }
+
+    .card-service::before {
+      content: '';
+      @apply absolute top-0 left-0 right-0 h-1;
+      background: linear-gradient(90deg,
+        theme(colors.brand-terracotta-600),
+        theme(colors.brand-dark-green-900));
+    }
+
+    .card-testimonial {
+      background-color: theme(colors.brand-paper-400);
+      border-left: 4px solid theme(colors.brand-terracotta-600);
+    }
+
+    .card-lawyer {
+      @apply text-center bg-white/90;
+      backdrop-filter: blur(10px);
+    }
+  }
+
+  /* ==========================================================================
+     SISTEMA DE NAVEGAÇÃO LEGADO
+     ========================================================================== */
+
+  @layer components {
+    /* === NAVBAR === */
+    .navbar {
+      @apply fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300;
+    }
+
+    .navbar-transparent {
+      @apply bg-transparent;
+    }
+
+    .navbar-solid {
+      background-color: theme(colors.brand-dark-green-900 / 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: theme(shadow);
+    }
+
+    .navbar-container {
+      @apply flex items-center justify-between max-w-screen-xl mx-auto px-6;
+    }
+
+    /* === LOGO === */
+    .navbar-logo {
+      @apply h-10 w-auto transition-all duration-300 hover:scale-105;
+    }
+
+    /* === MENU DE NAVEGAÇÃO === */
+    .nav-menu {
+      @apply flex items-center gap-8 list-none;
+    }
+
+    .nav-item {
+      @apply relative;
+    }
+
+    .nav-link {
+      @apply block px-4 py-2 font-medium no-underline transition-all duration-150 rounded-md;
+      color: theme(colors.brand-dark-green-900);
+    }
+
+    .navbar-solid .nav-link {
+      @apply text-white;
+    }
+
+    .nav-link:hover {
+      @apply no-underline;
+      color: theme(colors.brand-terracotta-600);
+      background-color: theme(colors.brand-terracotta-600 / 0.1);
+    }
+
+    .nav-link::after {
+      content: '';
+      @apply absolute -bottom-0.5 left-1/2 w-0 h-0.5 transition-all duration-150 -translate-x-1/2;
+      background-color: theme(colors.brand-terracotta-600);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      @apply w-4/5;
+    }
+
+    /* === MENU MOBILE === */
+    .mobile-menu-toggle {
+      @apply hidden flex-col gap-1 bg-transparent border-0 cursor-pointer p-2;
+    }
+
+    .mobile-menu-line {
+      @apply w-6 h-0.5 transition-all duration-150;
+      background-color: theme(colors.brand-dark-green-900);
+    }
+
+    .navbar-solid .mobile-menu-line {
+      @apply bg-white;
+    }
+  }
+
+  /* ==========================================================================
+     SISTEMA DE FORMULÁRIOS LEGADO
+     ========================================================================== */
+
+  @layer components {
+    /* === GRUPOS DE FORMULÁRIO === */
+    .form-group {
+      @apply mb-6;
+    }
+
+    .form-label {
+      @apply block mb-2 font-semibold;
+      color: theme(colors.brand-dark-green-900);
+    }
+
+    .form-input {
+      @apply w-full p-4 border-2 rounded-md font-sans text-base
+             bg-white transition-all duration-150;
+      border-color: theme(colors.brand-paper-500);
+    }
+
+    .form-input:focus {
+      @apply outline-none;
+      border-color: theme(colors.brand-terracotta-600);
+      box-shadow: 0 0 0 3px theme(colors.brand-terracotta-600 / 0.1);
+    }
+
+    .form-textarea {
+      @apply min-h-[120px] resize-y;
+    }
+
+    .form-select {
+      @apply pr-12;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.75rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+    }
+
+    /* === MENSAGENS DE FORMULÁRIO === */
+    .form-error {
+      @apply text-sm mt-1;
+      color: theme(colors.error);
+    }
+
+    .form-success {
+      @apply text-sm mt-1;
+      color: theme(colors.success);
+    }
+  }
+
+  /* ==========================================================================
+     ELEMENTOS ESPECÍFICOS LEGADOS
+     ========================================================================== */
+
+  @layer components {
+    /* === HERO SECTION === */
+    .hero-gradient {
+      background: linear-gradient(135deg,
+        theme(colors.brand-beige-400) 0%,
+        theme(colors.brand-paper-400) 50%,
+        theme(colors.brand-beige-300) 100%);
+    }
+
+    .hero-overlay {
+      @apply relative;
+    }
+
+    .hero-overlay::before {
+      content: '';
+      @apply absolute inset-0 pointer-events-none;
+      background: linear-gradient(45deg,
+        theme(colors.brand-dark-green-900 / 0.1) 0%,
+        transparent 50%,
+        theme(colors.brand-terracotta-600 / 0.05) 100%);
+    }
+
+    /* === ÁREA DE ATUAÇÃO === */
+    .practice-area-icon {
+      @apply w-12 h-12 p-2 rounded-lg text-white flex items-center
+             justify-center mb-4;
+      background: linear-gradient(135deg,
+        theme(colors.brand-terracotta-600),
+        theme(colors.brand-terracotta-700));
+    }
+
+    /* === ESTATÍSTICAS === */
+    .stat-number {
+      @apply font-serif font-bold leading-none;
+      color: theme(colors.brand-terracotta-600);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .stat-label {
+      @apply text-sm font-medium uppercase tracking-wider;
+      color: theme(colors.brand-dark-green-900);
+    }
+
+    /* === DEPOIMENTOS === */
+    .testimonial-quote {
+      @apply text-lg italic leading-relaxed relative p-6;
+      color: theme(colors.brand-black);
+    }
+
+    .testimonial-quote::before {
+      content: '"';
+      @apply absolute top-0 left-0 text-6xl font-serif leading-none opacity-30;
+      color: theme(colors.brand-terracotta-600);
+    }
+
+    /* === CONTATO === */
+    .contact-info-item {
+      @apply flex items-center gap-4 p-4 rounded-md transition-all duration-150;
+    }
+
+    .contact-info-item:hover {
+      background-color: theme(colors.brand-terracotta-600 / 0.05);
+      @apply translate-x-1;
+    }
+
+    .contact-icon {
+      @apply w-8 h-8 p-1 rounded-md text-white flex items-center justify-center shrink-0;
+      background-color: theme(colors.brand-terracotta-600);
+    }
+  }
+
+  /* ==========================================================================
+     ESTADOS ESPECIAIS LEGADOS
+     ========================================================================== */
+
+  @layer components {
+    /* === LOADING STATES === */
+    .btn:disabled,
+    .btn.loading {
+      @apply opacity-60 cursor-not-allowed pointer-events-none;
+    }
+
+    .btn.loading::after {
+      content: '';
+      @apply w-4 h-4 border-2 border-transparent border-t-current rounded-full;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* === HOVER ANIMATIONS === */
+    .hover-lift {
+      @apply transition-transform duration-300;
+    }
+
+    .hover-lift:hover {
+      @apply -translate-y-1;
+    }
+
+    .hover-scale {
+      @apply transition-transform duration-300;
+    }
+
+    .hover-scale:hover {
+      @apply scale-105;
+    }
+
+    /* === ELEMENTOS DECORATIVOS === */
+    .divider-ornament {
+      @apply relative text-center my-12;
+    }
+
+    .divider-ornament::before {
+      content: '';
+      @apply absolute top-1/2 left-0 right-0 h-px;
+      background: linear-gradient(90deg,
+        transparent,
+        theme(colors.brand-terracotta-600),
+        transparent);
+    }
+
+    .divider-ornament::after {
+      content: '⚖';
+      @apply px-4 text-2xl;
+      background-color: theme(colors.brand-beige-400);
+      color: theme(colors.brand-terracotta-600);
+    }
+  }
+
+  /* ==========================================================================
+     RESPONSIVIDADE DOS COMPONENTES
+     ========================================================================== */
+
+  /* === MOBILE === */
+  @media (max-width: 767px) {
+    .nav-menu {
+      @apply hidden;
+    }
+
+    .mobile-menu-toggle {
+      @apply flex;
+    }
+
+    .btn {
+      @apply w-full justify-center;
+    }
+
+    .card {
+      @apply mx-4;
+    }
+
+    .navbar-container {
+      @apply px-4;
+    }
+  }
+
+  /* === TABLET === */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .nav-menu {
+      @apply gap-4;
+    }
+
+    .btn-lg,
+    .btn-xl {
+      @apply px-6 py-4 text-base;
+    }
+  }
+
+  /* === DESKTOP LARGE === */
+  @media (min-width: 1280px) {
+    .navbar-container {
+      @apply px-8;
+    }
+
+    .card:hover {
+      @apply -translate-y-1.5;
+    }
+  }
+
+  /* ==========================================================================
+     UTILITIES ESPECÍFICAS (não cobertas pelo @layer components)
+     ========================================================================== */
+
+  /* === SPINNER CUSTOMIZADO === */
+  .spinner-brand {
+    @apply w-8 h-8 rounded-full;
+    border: 3px solid theme(colors.brand-paper-400);
+    border-top: 3px solid theme(colors.brand-terracotta-600);
+    animation: spin 1s linear infinite;
+  }
+
+  /* === FORM INPUT FOCUS LINE === */
+  .form-input-animated {
+    @apply relative;
+  }
+
+  .form-input-animated::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300;
+    background-color: theme(colors.brand-terracotta-600);
+  }
+
+  .form-input-animated:focus::after {
+    @apply w-full;
+  }
+
+  /* === GRADIENT OVERLAYS === */
+  .gradient-overlay-dark {
+    background: linear-gradient(135deg,
+      theme(colors.brand-dark-green-900 / 0.8) 0%,
+      theme(colors.brand-dark-green-900 / 0.4) 100%);
+  }
+
+  .gradient-overlay-light {
+    background: linear-gradient(135deg,
+      theme(colors.brand-beige-400 / 0.9) 0%,
+      theme(colors.brand-paper-400 / 0.7) 100%);
+  }
+
+  /* === ASPECT RATIOS CUSTOMIZADOS === */
+  .aspect-golden {
+    aspect-ratio: 1.618 / 1;
+  }
+
+  .aspect-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  .aspect-hero {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* === TEXT SHADOWS === */
+  .text-shadow-soft {
+    text-shadow: 0 2px 4px theme(colors.brand-dark-green-900 / 0.3);
+  }
+
+  .text-shadow-strong {
+    text-shadow: 0 4px 8px theme(colors.brand-dark-green-900 / 0.5);
+  }
+
+  /* === BACKDROP FILTERS === */
+  .backdrop-glass {
+    backdrop-filter: blur(10px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .backdrop-dark-glass {
+    backdrop-filter: blur(10px) saturate(180%);
+    background-color: theme(colors.brand-dark-green-900 / 0.8);
+  }

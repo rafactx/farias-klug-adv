@@ -1,0 +1,555 @@
+/**
+ * FARIAS KLUG ADVOCACIA - GLOBALS CSS (TAILWIND 4)
+ * =======================================================
+ *
+ * Arquivo de estilos globais seguindo as diretrizes da marca.
+ * Tailwind 4 com configuração CSS-first integrada.
+ *
+ * @author: https://github.com/rafactx
+ * @version: 1.0.1 - FINAL CORRIGIDO
+ * @description: Sistema de design baseado na identidade visual premium do escritório
+ */
+
+/* ==========================================================================
+   IMPORTS E DEPENDÊNCIAS (TAILWIND 4)
+   ========================================================================== */
+
+   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+   /* NOVA SINTAXE TAILWIND 4 */
+   @import "tailwindcss";
+
+   /* ==========================================================================
+      CONFIGURAÇÃO TAILWIND 4 - DESIGN SYSTEM FARIAS KLUG
+      ========================================================================== */
+
+   @theme {
+     /* === CORES DA MARCA COM ESCALAS COMPLETAS === */
+     --color-brand-terracotta-50: #FDF8F5;
+     --color-brand-terracotta-100: #F8E8D8;
+     --color-brand-terracotta-200: #F0D1B1;
+     --color-brand-terracotta-300: #E5B389;
+     --color-brand-terracotta-400: #D99662;
+     --color-brand-terracotta-500: #B8703D;
+     --color-brand-terracotta-600: #8E4616; /* Principal */
+     --color-brand-terracotta-700: #7A3A12;
+     --color-brand-terracotta-800: #662F0F;
+     --color-brand-terracotta-900: #52240C;
+     --color-brand-terracotta-950: #3E1B09;
+
+     --color-brand-dark-green-50: #F7F8F6;
+     --color-brand-dark-green-100: #E8EBE5;
+     --color-brand-dark-green-200: #D1D7CB;
+     --color-brand-dark-green-300: #B0BBA6;
+     --color-brand-dark-green-400: #8A9B7A;
+     --color-brand-dark-green-500: #6B7C59;
+     --color-brand-dark-green-600: #546045;
+     --color-brand-dark-green-700: #424D37;
+     --color-brand-dark-green-800: #2A3E22;
+     --color-brand-dark-green-900: #1E2B1A; /* Principal */
+     --color-brand-dark-green-950: #151E12;
+
+     --color-brand-beige-50: #FAF8F5;
+     --color-brand-beige-100: #F2EDE3;
+     --color-brand-beige-200: #E5D8C7;
+     --color-brand-beige-300: #DCC8AE;
+     --color-brand-beige-400: #CEBAA3; /* Principal */
+     --color-brand-beige-500: #B8A089;
+     --color-brand-beige-600: #A18971;
+     --color-brand-beige-700: #8B755E;
+     --color-brand-beige-800: #6F5E4C;
+     --color-brand-beige-900: #5A4D3E;
+     --color-brand-beige-950: #453C31;
+
+     --color-brand-paper-50: #FAFAF9;
+     --color-brand-paper-100: #F3F1ED;
+     --color-brand-paper-200: #E7E2DB;
+     --color-brand-paper-300: #E2DDD6;
+     --color-brand-paper-400: #D8D3CC; /* Principal */
+     --color-brand-paper-500: #C5C0B8;
+     --color-brand-paper-600: #B2ABA1;
+     --color-brand-paper-700: #9B9389;
+     --color-brand-paper-800: #7D7669;
+     --color-brand-paper-900: #646054;
+     --color-brand-paper-950: #4F4C42;
+
+     --color-brand-black: #1C1C1C;
+     --color-brand-black-light: #2A2A2A;
+
+     /* === CORES FUNCIONAIS === */
+     --color-success: #22C55E;
+     --color-warning: #F59E0B;
+     --color-error: #EF4444;
+     --color-info: #3B82F6;
+
+     /* === FAMÍLIA TIPOGRÁFICA === */
+     --font-family-serif: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+     --font-family-sans: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+
+     /* === ESPAÇAMENTOS === */
+     --spacing-0: 0rem;
+     --spacing-px: 0.0625rem;
+     --spacing-0-5: 0.125rem;
+     --spacing-1: 0.25rem;
+     --spacing-1-5: 0.375rem;
+     --spacing-2: 0.5rem;
+     --spacing-2-5: 0.625rem;
+     --spacing-3: 0.75rem;
+     --spacing-3-5: 0.875rem;
+     --spacing-4: 1rem;
+     --spacing-5: 1.25rem;
+     --spacing-6: 1.5rem;
+     --spacing-7: 1.75rem;
+     --spacing-8: 2rem;
+     --spacing-9: 2.25rem;
+     --spacing-10: 2.5rem;
+     --spacing-11: 2.75rem;
+     --spacing-12: 3rem;
+     --spacing-14: 3.5rem;
+     --spacing-16: 4rem;
+     --spacing-20: 5rem;
+     --spacing-24: 6rem;
+     --spacing-28: 7rem;
+     --spacing-32: 8rem;
+     --spacing-36: 9rem;
+     --spacing-40: 10rem;
+     --spacing-44: 11rem;
+     --spacing-48: 12rem;
+     --spacing-52: 13rem;
+     --spacing-56: 14rem;
+     --spacing-60: 15rem;
+     --spacing-64: 16rem;
+     --spacing-72: 18rem;
+     --spacing-80: 20rem;
+     --spacing-96: 24rem;
+
+     /* === BORDER RADIUS === */
+     --radius-none: 0rem;
+     --radius-sm: 0.125rem;
+     --radius: 0.25rem;
+     --radius-md: 0.375rem;
+     --radius-lg: 0.5rem;
+     --radius-xl: 0.75rem;
+     --radius-2xl: 1rem;
+     --radius-3xl: 1.5rem;
+     --radius-full: 9999px;
+
+     /* === SOMBRAS === */
+     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+     --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+     --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+     --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+     --shadow-none: 0 0 #0000;
+
+     /* === SOMBRAS CUSTOMIZADAS DA MARCA === */
+     --shadow-brand-soft: 0 4px 6px -1px rgba(142, 70, 22, 0.1), 0 2px 4px -1px rgba(142, 70, 22, 0.06);
+     --shadow-brand-medium: 0 10px 15px -3px rgba(142, 70, 22, 0.1), 0 4px 6px -2px rgba(142, 70, 22, 0.05);
+     --shadow-brand-strong: 0 20px 25px -5px rgba(142, 70, 22, 0.1), 0 10px 10px -5px rgba(142, 70, 22, 0.04);
+
+     /* === TRANSIÇÕES === */
+     --transition-none: none;
+     --transition-all: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+     --transition: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter 150ms cubic-bezier(0.4, 0, 0.2, 1);
+     --transition-colors: color, background-color, border-color, text-decoration-color, fill, stroke 150ms cubic-bezier(0.4, 0, 0.2, 1);
+     --transition-opacity: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+     --transition-shadow: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
+     --transition-transform: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+     /* === EASING CUSTOMIZADOS === */
+     --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+     --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+     --ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+     --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+   }
+
+   /* ==========================================================================
+      UTILITIES CUSTOMIZADAS
+      ========================================================================== */
+
+   @layer utilities {
+     /* === GRADIENTES DA MARCA === */
+     .bg-gradient-brand {
+       background: linear-gradient(135deg,
+         theme(colors.brand-beige-400) 0%,
+         theme(colors.brand-paper-400) 50%,
+         theme(colors.brand-beige-300) 100%);
+     }
+
+     .bg-gradient-hero {
+       background: linear-gradient(135deg,
+         theme(colors.brand-beige-400) 0%,
+         theme(colors.brand-paper-400) 100%);
+     }
+
+     .bg-gradient-terracotta {
+       background: linear-gradient(135deg,
+         theme(colors.brand-terracotta-600) 0%,
+         theme(colors.brand-terracotta-700) 100%);
+     }
+
+     /* === TEXTURAS === */
+     .bg-texture-paper {
+       background-color: theme(colors.brand-beige-400);
+       background-image:
+         radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
+       background-size: 20px 20px;
+     }
+
+     .bg-texture-linen {
+       background-color: theme(colors.brand-paper-400);
+       background-image:
+         repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px);
+     }
+
+     /* === FILTROS === */
+     .filter-brand-glow {
+       filter: drop-shadow(0 4px 8px rgba(142, 70, 22, 0.2));
+     }
+
+     /* === ASPECTOS CUSTOMIZADOS === */
+     .aspect-golden {
+       aspect-ratio: 1.618 / 1;
+     }
+
+     .aspect-card {
+       aspect-ratio: 4 / 3;
+     }
+   }
+
+   /* ==========================================================================
+      COMPONENTS CUSTOMIZADOS
+      ========================================================================== */
+
+   @layer components {
+     /* === SISTEMA DE BOTÕES === */
+     .btn-base {
+       @apply inline-flex items-center justify-center gap-2 px-6 py-3
+              font-sans font-semibold text-base leading-none
+              border-0 rounded-full cursor-pointer
+              transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2;
+     }
+
+     .btn-primary {
+       @apply btn-base text-white;
+       background-color: theme(colors.brand-terracotta-600);
+       box-shadow: theme(shadow-brand-soft);
+     }
+
+     .btn-primary:hover {
+       background-color: theme(colors.brand-terracotta-700);
+       @apply -translate-y-0.5;
+       box-shadow: theme(shadow-brand-medium);
+     }
+
+     .btn-secondary {
+       @apply btn-base text-white;
+       background-color: theme(colors.brand-dark-green-900);
+       box-shadow: theme(shadow-brand-soft);
+     }
+
+     .btn-secondary:hover {
+       background-color: theme(colors.brand-dark-green-800);
+       @apply -translate-y-0.5;
+       box-shadow: theme(shadow-brand-medium);
+     }
+
+     .btn-outline {
+       @apply btn-base bg-transparent border-2;
+       color: theme(colors.brand-terracotta-600);
+       border-color: theme(colors.brand-terracotta-600);
+     }
+
+     .btn-outline:hover {
+       background-color: theme(colors.brand-terracotta-600);
+       @apply text-white -translate-y-0.5;
+     }
+
+     .btn-ghost {
+       @apply btn-base bg-transparent border-2 border-transparent;
+       color: theme(colors.brand-dark-green-900);
+     }
+
+     .btn-ghost:hover {
+       background-color: theme(colors.brand-dark-green-50);
+       border-color: theme(colors.brand-dark-green-900);
+     }
+
+     /* === SISTEMA DE CARDS === */
+     .card-base {
+       @apply bg-white/95 backdrop-blur-sm border border-white/20
+              rounded-2xl overflow-hidden transition-all duration-300;
+       box-shadow: theme(shadow);
+     }
+
+     .card-base:hover {
+       @apply -translate-y-1;
+       box-shadow: theme(shadow-brand-medium);
+     }
+
+     .card-premium {
+       @apply card-base;
+       background: rgba(255, 255, 255, 0.9);
+       backdrop-filter: blur(10px);
+     }
+
+     .card-service::before {
+       content: '';
+       @apply absolute top-0 left-0 right-0 h-1;
+       background: linear-gradient(90deg,
+         theme(colors.brand-terracotta-600),
+         theme(colors.brand-dark-green-900));
+     }
+
+     /* === TIPOGRAFIA DE MARCA === */
+     .text-brand-heading {
+       @apply font-serif font-semibold leading-tight;
+       color: theme(colors.brand-dark-green-900);
+     }
+
+     .text-brand-body {
+       @apply font-sans leading-relaxed;
+       color: theme(colors.brand-black);
+     }
+
+     .text-brand-lead {
+       @apply text-lg font-normal leading-8;
+       color: theme(colors.brand-black-light);
+     }
+   }
+
+   /* ==========================================================================
+      RESET E CONFIGURAÇÕES BASE
+      ========================================================================== */
+
+   *,
+   *::before,
+   *::after {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+   }
+
+   html {
+     scroll-behavior: smooth;
+     font-size: 16px;
+     line-height: 1.6;
+   }
+
+   body {
+     font-family: theme(fontFamily.sans);
+     color: theme(colors.brand-black);
+     background-color: theme(colors.brand-beige-400);
+     line-height: 1.7;
+     font-weight: 400;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     overflow-x: hidden;
+   }
+
+   /* ==========================================================================
+      TIPOGRAFIA HIERÁRQUICA
+      ========================================================================== */
+
+   h1, h2, h3, h4, h5, h6 {
+     font-family: theme(fontFamily.serif);
+     color: theme(colors.brand-dark-green-900);
+     font-weight: 600;
+     line-height: 1.2;
+     margin-bottom: theme(spacing.4);
+     letter-spacing: -0.01em;
+   }
+
+   h1 {
+     font-size: clamp(2.5rem, 5vw, 4rem);
+     font-weight: 700;
+     margin-bottom: theme(spacing.6);
+   }
+
+   h2 {
+     font-size: clamp(2rem, 4vw, 3rem);
+     font-weight: 600;
+   }
+
+   h3 {
+     font-size: clamp(1.5rem, 3vw, 2.25rem);
+     font-weight: 600;
+   }
+
+   h4 {
+     font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+     font-weight: 500;
+   }
+
+   h5 {
+     font-size: clamp(1.125rem, 2vw, 1.5rem);
+     font-weight: 500;
+   }
+
+   h6 {
+     font-size: clamp(1rem, 1.5vw, 1.25rem);
+     font-weight: 500;
+   }
+
+   p {
+     margin-bottom: theme(spacing.4);
+     color: theme(colors.brand-black);
+     font-size: clamp(1rem, 1.5vw, 1.125rem);
+   }
+
+   .lead {
+     font-size: clamp(1.125rem, 2vw, 1.25rem);
+     font-weight: 400;
+     color: theme(colors.brand-black-light);
+     line-height: 1.8;
+   }
+
+   .small-text {
+     font-size: 0.875rem;
+     color: theme(colors.brand-black-light);
+   }
+
+   /* ==========================================================================
+      LINKS E ELEMENTOS INTERATIVOS
+      ========================================================================== */
+
+   a {
+     color: theme(colors.brand-terracotta-600);
+     text-decoration: none;
+     transition: color 150ms ease-in-out;
+   }
+
+   a:hover {
+     color: theme(colors.brand-terracotta-700);
+     text-decoration: underline;
+   }
+
+   a:focus {
+     outline: 2px solid theme(colors.brand-terracotta-600);
+     outline-offset: 2px;
+   }
+
+   /* ==========================================================================
+      ELEMENTOS DE FORMULÁRIO
+      ========================================================================== */
+
+   input, textarea, select {
+     font-family: theme(fontFamily.sans);
+     border: 1px solid theme(colors.brand-paper-500);
+     border-radius: theme(radius.md);
+     padding: theme(spacing.4);
+     background-color: white;
+     transition: border-color 150ms ease-in-out;
+   }
+
+   input:focus, textarea:focus, select:focus {
+     outline: none;
+     border-color: theme(colors.brand-terracotta-600);
+     box-shadow: 0 0 0 3px rgba(142, 70, 22, 0.1);
+   }
+
+   /* ==========================================================================
+      CLASSES UTILITÁRIAS PERSONALIZADAS
+      ========================================================================== */
+
+   .container-custom {
+     max-width: 1280px;
+     margin: 0 auto;
+     padding: 0 theme(spacing.6);
+   }
+
+   .section-padding {
+     padding: theme(spacing.16) 0;
+   }
+
+   .logo-glow {
+     filter: drop-shadow(0 4px 8px rgba(142, 70, 22, 0.2));
+   }
+
+   .skeleton {
+     background: linear-gradient(90deg,
+       theme(colors.brand-paper-400) 25%,
+       theme(colors.brand-paper-300) 50%,
+       theme(colors.brand-paper-400) 75%);
+     background-size: 200% 100%;
+     animation: skeleton-loading 1.5s infinite;
+   }
+
+   @keyframes skeleton-loading {
+     0% { background-position: 200% 0; }
+     100% { background-position: -200% 0; }
+   }
+
+   /* ==========================================================================
+      RESPONSIVIDADE E BREAKPOINTS
+      ========================================================================== */
+
+   @media (max-width: 640px) {
+     .section-padding {
+       padding: theme(spacing.12) 0;
+     }
+
+     .container-custom {
+       padding: 0 theme(spacing.4);
+     }
+   }
+
+   @media (min-width: 768px) {
+     .container-custom {
+       padding: 0 theme(spacing.8);
+     }
+   }
+
+   @media (min-width: 1024px) {
+     .section-padding {
+       padding: theme(spacing.20) 0;
+     }
+   }
+
+   /* ==========================================================================
+      ACESSIBILIDADE
+      ========================================================================== */
+
+   *:focus-visible {
+     outline: 2px solid theme(colors.brand-terracotta-600);
+     outline-offset: 2px;
+   }
+
+   @media (prefers-reduced-motion: reduce) {
+     * {
+       animation-duration: 0.01ms !important;
+       animation-iteration-count: 1 !important;
+       transition-duration: 0.01ms !important;
+     }
+   }
+
+   @media (prefers-contrast: high) {
+     :root {
+       --color-brand-terracotta-600: #7A3A12;
+       --color-brand-dark-green-900: #0F1A0D;
+       --color-brand-black: #000000;
+     }
+   }
+
+   /* ==========================================================================
+      PRINT STYLES
+      ========================================================================== */
+
+   @media print {
+     * {
+       background: white !important;
+       color: black !important;
+       box-shadow: none !important;
+     }
+
+     a, a:visited {
+       text-decoration: underline;
+     }
+
+     .no-print {
+       display: none !important;
+     }
+   }
