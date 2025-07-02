@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Farias Klug Advocacia — Website
+
+This is a modern, responsive website built with [Next.js 15](https://nextjs.org), [Tailwind CSS v4](https://tailwindcss.com/), and [TypeScript](https://www.typescriptlang.org/), designed to deliver a premium user experience for a law firm specialized in Environmental and Business Law.
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open your browser at [http://localhost:3000](http://localhost:3000) to see the result.
 
-## Learn More
+Start editing the UI by modifying components inside `src/app/` and `src/components/`.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* **Next.js 15** — App Router, React 19
+* **Tailwind CSS v4** — Utility-first styling
+* **TypeScript** — Type-safe development
+* **Framer Motion** — Page and UI animations
+* **Lucide + Tabler Icons** — Elegant icon sets
+* **pnpm** — Fast and disk-efficient package manager
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Folder Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+🔹 public/                 → Static assets (images, logos)
+🔹 src/
+│   ├── app/               → Routes, layout and pages
+│   ├── components/        → Shared UI components
+│   └── lib/               → Utilities and helpers
+🔹 tailwind.config.js     → Tailwind CSS configuration
+🔹 next.config.ts         → Next.js config
+🔹 tsconfig.json          → TypeScript config
+🔹 README.md
+```
+
+---
+
+## Development Features
+
+* Animated hero section with parallax and scroll hint
+* Visuals inspired by premium branding and HIG principles
+* Mobile-first and fully responsive layout
+* Accessible and SEO-friendly foundation
+* Clean code with modern patterns
+
+---
+
+## Deployment
+
+Deploy effortlessly using [Vercel](https://vercel.com/):
+
+```bash
+pnpm build
+pnpm start
+```
+
+Or connect your GitHub repo directly to Vercel.
+
+More info: [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying)
+
+---
+
+## License
+
+This project is private and protected. All rights reserved © Farias Klug Advocacia.

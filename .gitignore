@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# Dependencies
 /node_modules
 /.pnp
 .pnp.*
@@ -9,33 +9,98 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+node_modules/
+jspm_packages/
 
-# testing
+# Testing
 /coverage
+coverage/
+*.lcov
+.nyc_output
 
-# next.js
+# Next.js
 /.next/
 /out/
+.next
+out
 
-# production
+# Production
 /build
+dist
 
-# misc
-.DS_Store
-*.pem
-
-# debug
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# env files (can opt-in for committing if needed)
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment variables
 .env*
 
-# vercel
+# Deployment
 .vercel
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDEs and Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*~
+
+# Cache
+.npm
+.eslintcache
+.cache
+.parcel-cache
+.tailwindcss-cache
+.fonts-cache
+
+# Temporary files
+tmp/
+temp/
+*.pem
+
+# Optional files
+.node_repl_history
+*.tgz
+.yarn-integrity
+
+# Storybook
+.out
+.storybook-out
+storybook-static
+
+# Development
+*.local

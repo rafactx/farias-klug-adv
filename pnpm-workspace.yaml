@@ -1,0 +1,6 @@
+packages:
+  - gemini-cli/packages/*
+
+onlyBuiltDependencies:
+  - esbuild
+  - protobufjs
