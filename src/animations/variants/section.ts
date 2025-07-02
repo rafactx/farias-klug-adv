@@ -40,6 +40,22 @@ export const sectionVariants = {
     }
   },
 
+  // Alias para staggerItem (usado em muitos componentes)
+  staggerChild: {
+    initial: {
+      opacity: 0,
+      y: 30
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut'
+      }
+    }
+  },
+
   // Animação padrão de entrada
   fadeInUp: {
     initial: {

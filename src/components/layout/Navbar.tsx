@@ -9,7 +9,7 @@ import {
   NavbarLogo,
   NavBody,
   NavItems,
-} from "@/app/components/ui/resizable-navbar";
+} from "@/components/ui/resizable-navbar";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { useState } from "react";
 

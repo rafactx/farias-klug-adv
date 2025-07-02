@@ -60,6 +60,8 @@ export interface LegalArea extends BaseEntity, StatusEntity, OrderableEntity {
   onlineConsultation?: boolean
   /** Faixa de preço (para orientação) */
   priceRange?: 'low' | 'medium' | 'high' | 'premium'
+  /** Call-to-action personalizado para área */
+  cta?: LocalizedText
 }
 
 /* ==========================================================================

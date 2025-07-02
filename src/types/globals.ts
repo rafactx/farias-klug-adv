@@ -460,3 +460,14 @@ export const USER_ROLES = ['admin', 'editor', 'viewer'] as const
 
 /** Prioridades */
 export const PRIORITIES = ['low', 'normal', 'high'] as const
+
+// Declaração global para Google Analytics
+declare global {
+  interface Window {
+    gtag: (
+      command: 'config' | 'event' | 'js',
+      targetId: string | Date,
+      config?: Record<string, any>
+    ) => void
+  }
+}

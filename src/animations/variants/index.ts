@@ -2,14 +2,26 @@
 // Barrel export para todas as variantes de animação
 
 // Importar todas as variants
-export {
-  getRouteTransition, pageVariants,
-  routeTransitions
+import {
+    getRouteTransition,
+    pageVariants,
+    routeTransitions
 } from './page'
 
-export {
-  lawFirmSections, loadingVariants, sectionVariants, uiVariants
+import {
+    lawFirmSections,
+    loadingVariants,
+    sectionVariants,
+    uiVariants
 } from './section'
+
+// Re-exportar importações
+export {
+    getRouteTransition, lawFirmSections,
+    loadingVariants, pageVariants,
+    routeTransitions, sectionVariants,
+    uiVariants
+}
 
 // Re-exportar variants específicas mais usadas para fácil acesso
 export const {
@@ -20,7 +32,8 @@ export const {
   scaleIn,
   staggerContainer,
   staggerContainerFast,
-  staggerItem
+  staggerItem,
+  staggerChild
 } = sectionVariants
 
 export const {

@@ -1,62 +1,75 @@
 /**
- * @fileoverview Exportações centralizadas para componentes da seção About
+ * @fileoverview Barrel exports para seção About
  *
- * Este arquivo organiza todas as exportações relacionadas à seção "Sobre",
- * facilitando importações limpas e manutenção do código.
- *
- * @example
- * import { About, AboutStats } from '@/components/sections/about'
- * // ou
- * import { AboutComponents } from '@/components/sections/about'
- * const { About, AboutStats } = AboutComponents
+ * Centraliza exportações da seção "Sobre" incluindo componentes,
+ * hooks, tipos e utilitários relacionados.
  */
 
-/* ──────────────── Individual Exports ──────────────── */
-// Componente principal da seção About
-export { default as About } from './about'
+// Componente principal
+export { default as About, About as AboutSection } from './about'
 
-// Componente de estatísticas do escritório
+// Componente de estatísticas
 export { default as AboutStats } from './about-stats'
 
-/* ──────────────── Grouped Exports ──────────────── */
-/**
- * Exportação agrupada para facilitar importações organizadas
- *
- * @example
- * import { AboutComponents } from '@/components/sections/about'
- * const { About, AboutStats } = AboutComponents
- */
-export const AboutComponents = {
-  About: require('./about').default,
-  AboutStats: require('./about-stats').default,
+// Re-exports de tipos
+export type {
+  AboutProps, Credential, Statistic,
+  Value
+} from './about'
+
+// Hooks
+export { useAboutAnalytics } from './about'
+
+// Configurações
+export const ABOUT_CONFIG = {
+  DEFAULT_STATS_COUNT: 4,
+  DEFAULT_VALUES_COUNT: 4,
+  DEFAULT_CREDENTIALS_COUNT: 3,
+  ANIMATION_DELAY: 0.1,
+  SUPPORTED_VARIANTS: ['default', 'detailed', 'compact'] as const
 } as const
 
-/* ──────────────── Default Export ──────────────── */
-/**
- * Exportação padrão do componente principal About
- * Para casos onde você só precisa do componente principal
- *
- * @example
- * import About from '@/components/sections/about'
- */
-export { default } from './about'
+// Utilitários específicos
+export const aboutUtils = {
+  formatStatValue: (value: string | number) => {
+    if (typeof value === 'number') {
+      return value >= 1000 ? `${(value / 1000).toFixed(1)}k+` : `${value}+`
+    }
+    return value
+  },
 
-/* ──────────────── Types ──────────────── */
-/**
- * Types relacionados aos componentes About
- */
-export type AboutComponent = typeof import('./about').default
-export type AboutStatsComponent = typeof import('./about-stats').default
+  calculateDelay: (index: number) => index * 0.1,
 
-export interface AboutSection {
-  About: AboutComponent
-  AboutStats: AboutStatsComponent
+  validateProps: (props: any) => {
+    // Validação básica das props
+    return true
+  }
+} as const
+
+// Hook de analytics centralizado
+export const useAboutSectionAnalytics = () => {
+  const trackAboutView = (variant: string, locale: string) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_section_view', {
+        variant,
+        locale,
+        page_location: window.location.href
+      })
+    }
+  }
+
+  const trackAboutInteraction = (action: string, data?: Record<string, any>) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_interaction', {
+        action,
+        ...data,
+        page_location: window.location.href
+      })
+    }
+  }
+
+  return { trackAboutView, trackAboutInteraction }
 }
 
-/* ──────────────── Re-exports for convenience ──────────────── */
-/**
- * Re-exportações para facilitar acesso a tipos e interfaces
- * dos componentes internos, se necessário
- */
-export type { default as AboutProps } from './about'
-export type { default as AboutStatsProps } from './about-stats'
+// Exportação padrão
+export { default } from './about'

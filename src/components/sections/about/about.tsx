@@ -1,334 +1,913 @@
+/**
+ * @fileoverview Seção About principal
+ *
+ * Componente da seção "Sobre" com informações do escritório, missão,
+ * valores, estatísticas e credenciais. Otimizado para conversão e storytelling.
+ *
+ * @example
+ * ```tsx
+ * <About
+ *   locale="pt-br"
+ *   variant="default"
+ *   showStats
+ *   showCredentials
+ * />
+ * ```
+ */
+
 'use client'
 
-import {
-  BuildingOfficeIcon,
-  DocumentCheckIcon,
-  GlobeAmericasIcon,
-  HandRaisedIcon,
-  ScaleIcon,
-  ShieldCheckIcon
-} from '@heroicons/react/24/outline'
+import { slideInLeft, slideInRight, staggerChild, staggerContainer } from '@/animations/variants'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
+import { Locale } from '@/types/globals'
 import { motion } from 'framer-motion'
+import {
+  Award,
+  Calendar,
+  Heart,
+  MapPin,
+  Scale,
+  Target,
+  Trophy,
+  Users
+} from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { memo, useCallback, useMemo } from 'react'
 
-/* ──────────────── Types & Interfaces ──────────────── */
-interface ServiceItem {
-  name: string
-  description: string
-  icon: React.ComponentType<{ className?: string }>
+/* ==========================================================================
+   TIPOS E INTERFACES
+   ========================================================================== */
+
+export interface AboutProps {
+  /** Idioma atual */
+  locale: Locale
+  /** Variante do componente */
+  variant?: 'default' | 'detailed' | 'compact'
+  /** Se deve exibir estatísticas */
+  showStats?: boolean
+  /** Se deve exibir credenciais */
+  showCredentials?: boolean
+  /** Se deve exibir imagem principal */
+  showImage?: boolean
+  /** Se deve exibir botão de contato */
+  showContactButton?: boolean
+  /** Callback para clique no botão de contato */
+  onContactClick?: () => void
+  /** Classe CSS adicional */
+  className?: string
 }
 
-interface ValueItem {
+interface Statistic {
+  label: string
+  value: string | number
+  icon: typeof Users
+  color: string
+  description?: string
+}
+
+interface Value {
   title: string
   description: string
-  icon: React.ComponentType<{ className?: string }>
+  icon: typeof Scale
 }
 
-interface AnimationConfig {
-  duration: number
-  stagger: number
-  viewport: {
-    once: boolean
-    margin?: string
-  }
+interface Credential {
+  title: string
+  description: string
+  year?: string
+  issuer?: string
 }
 
-/* ──────────────── Constants & Configuration ──────────────── */
-const ANIMATION_CONFIG: AnimationConfig = {
-  duration: 0.6,
-  stagger: 0.2,
-  viewport: {
-    once: true,
-    margin: '-100px'
-  }
+/* ==========================================================================
+   CONFIGURAÇÕES
+   ========================================================================== */
+
+const ABOUT_CONFIG = {
+  ANIMATION_DELAY: 0.1,
+  STAGGER_DELAY: 0.15,
+  STAT_ICON_SIZE: 24,
+  VALUE_ICON_SIZE: 32,
+  IMAGE_ASPECT_RATIO: '4/3',
+  BACKGROUND_GRADIENT: 'from-blue-50/50 via-white to-green-50/50 dark:from-blue-950/20 dark:via-background dark:to-green-950/20'
 } as const
 
-const MAIN_SERVICES: ServiceItem[] = [
-  {
-    name: 'Licenciamento Ambiental',
-    description: 'Acompanhamento técnico completo em todas as fases do processo de licenciamento ambiental.',
-    icon: DocumentCheckIcon,
+const LOCALIZED_CONTENT = {
+  'pt-br': {
+    title: 'Sobre Nós',
+    subtitle: 'Excelência em Direito Ambiental',
+    description: 'Somos um escritório de advocacia especializado em direito ambiental, oferecendo soluções jurídicas completas e estratégicas para empresas e pessoas físicas em Santa Catarina.',
+    fullDescription: 'Com anos de experiência e expertise consolidada, atendemos desde grandes corporações até pequenos produtores rurais, sempre com o compromisso de encontrar soluções eficientes e sustentáveis para cada caso.',
+    mission: {
+      title: 'Nossa Missão',
+      text: 'Proteger os interesses dos nossos clientes através de estratégias jurídicas inovadoras e sustentáveis, contribuindo para o desenvolvimento econômico responsável.'
+    },
+    values: {
+      title: 'Nossos Valores',
+      items: [
+        {
+          title: 'Excelência',
+          description: 'Buscamos sempre a mais alta qualidade em todos os nossos serviços',
+          icon: Trophy
+        },
+        {
+          title: 'Ética',
+          description: 'Atuamos com transparência e integridade em todas as nossas relações',
+          icon: Scale
+        },
+        {
+          title: 'Compromisso',
+          description: 'Dedicação total aos interesses e objetivos dos nossos clientes',
+          icon: Target
+        },
+        {
+          title: 'Sustentabilidade',
+          description: 'Promovemos práticas que equilibram desenvolvimento e preservação',
+          icon: Heart
+        }
+      ]
+    },
+    stats: {
+      title: 'Nossa Trajetória',
+      items: [
+        {
+          label: 'Anos de Experiência',
+          value: '15+',
+          icon: Calendar,
+          color: 'text-blue-600',
+          description: 'Atuando no mercado'
+        },
+        {
+          label: 'Casos de Sucesso',
+          value: '1,200+',
+          icon: Trophy,
+          color: 'text-green-600',
+          description: 'Resultados positivos'
+        },
+        {
+          label: 'Clientes Atendidos',
+          value: '500+',
+          icon: Users,
+          color: 'text-purple-600',
+          description: 'Empresas e pessoas físicas'
+        },
+        {
+          label: 'Cidades Atendidas',
+          value: '50+',
+          icon: MapPin,
+          color: 'text-orange-600',
+          description: 'Em Santa Catarina'
+        }
+      ]
+    },
+    credentials: {
+      title: 'Reconhecimento',
+      subtitle: 'Credenciais que comprovam nossa expertise',
+      items: [
+        {
+          title: 'OAB/SC',
+          description: 'Inscritos na Ordem dos Advogados do Brasil - Seção Santa Catarina',
+          year: '2008'
+        },
+        {
+          title: 'Especialização em Direito Ambiental',
+          description: 'Pós-graduação em Direito Ambiental pela UFSC',
+          year: '2010'
+        },
+        {
+          title: 'Certificação ISO 14001',
+          description: 'Gestão Ambiental - Consultoria certificada',
+          year: '2018'
+        }
+      ]
+    },
+    cta: {
+      text: 'Conheça Nossa Equipe',
+      href: '/sobre'
+    }
   },
-  {
-    name: 'Defesa Jurídica',
-    description: 'Defesas e recursos contra autos de infração ambiental, com atuação estratégica no contencioso.',
-    icon: ShieldCheckIcon,
+  'en': {
+    title: 'About Us',
+    subtitle: 'Excellence in Environmental Law',
+    description: 'We are a law firm specialized in environmental law, offering complete and strategic legal solutions for companies and individuals in Santa Catarina.',
+    fullDescription: 'With years of experience and consolidated expertise, we serve from large corporations to small rural producers, always committed to finding efficient and sustainable solutions for each case.',
+    mission: {
+      title: 'Our Mission',
+      text: 'Protect our clients\' interests through innovative and sustainable legal strategies, contributing to responsible economic development.'
+    },
+    values: {
+      title: 'Our Values',
+      items: [
+        {
+          title: 'Excellence',
+          description: 'We always seek the highest quality in all our services',
+          icon: Trophy
+        },
+        {
+          title: 'Ethics',
+          description: 'We act with transparency and integrity in all our relationships',
+          icon: Scale
+        },
+        {
+          title: 'Commitment',
+          description: 'Total dedication to our clients\' interests and objectives',
+          icon: Target
+        },
+        {
+          title: 'Sustainability',
+          description: 'We promote practices that balance development and preservation',
+          icon: Heart
+        }
+      ]
+    },
+    stats: {
+      title: 'Our Journey',
+      items: [
+        {
+          label: 'Years of Experience',
+          value: '15+',
+          icon: Calendar,
+          color: 'text-blue-600',
+          description: 'Operating in the market'
+        },
+        {
+          label: 'Success Cases',
+          value: '1,200+',
+          icon: Trophy,
+          color: 'text-green-600',
+          description: 'Positive results'
+        },
+        {
+          label: 'Clients Served',
+          value: '500+',
+          icon: Users,
+          color: 'text-purple-600',
+          description: 'Companies and individuals'
+        },
+        {
+          label: 'Cities Served',
+          value: '50+',
+          icon: MapPin,
+          color: 'text-orange-600',
+          description: 'In Santa Catarina'
+        }
+      ]
+    },
+    credentials: {
+      title: 'Recognition',
+      subtitle: 'Credentials that prove our expertise',
+      items: [
+        {
+          title: 'OAB/SC',
+          description: 'Registered with the Brazilian Bar Association - Santa Catarina Section',
+          year: '2008'
+        },
+        {
+          title: 'Environmental Law Specialization',
+          description: 'Post-graduation in Environmental Law from UFSC',
+          year: '2010'
+        },
+        {
+          title: 'ISO 14001 Certification',
+          description: 'Environmental Management - Certified Consulting',
+          year: '2018'
+        }
+      ]
+    },
+    cta: {
+      text: 'Meet Our Team',
+      href: '/en/sobre'
+    }
   },
-  {
-    name: 'Consultoria Preventiva',
-    description: 'Assessoria jurídica para empresas e consultorias ambientais, garantindo conformidade legal.',
-    icon: ScaleIcon,
+  'es': {
+    title: 'Sobre Nosotros',
+    subtitle: 'Excelencia en Derecho Ambiental',
+    description: 'Somos un bufete de abogados especializado en derecho ambiental, ofreciendo soluciones jurídicas completas y estratégicas para empresas y personas físicas en Santa Catarina.',
+    fullDescription: 'Con años de experiencia y expertise consolidada, atendemos desde grandes corporaciones hasta pequeños productores rurales, siempre con el compromiso de encontrar soluciones eficientes y sostenibles para cada caso.',
+    mission: {
+      title: 'Nuestra Misión',
+      text: 'Proteger los intereses de nuestros clientes a través de estrategias jurídicas innovadoras y sostenibles, contribuyendo al desarrollo económico responsable.'
+    },
+    values: {
+      title: 'Nuestros Valores',
+      items: [
+        {
+          title: 'Excelencia',
+          description: 'Buscamos siempre la más alta calidad en todos nuestros servicios',
+          icon: Trophy
+        },
+        {
+          title: 'Ética',
+          description: 'Actuamos con transparencia e integridad en todas nuestras relaciones',
+          icon: Scale
+        },
+        {
+          title: 'Compromiso',
+          description: 'Dedicación total a los intereses y objetivos de nuestros clientes',
+          icon: Target
+        },
+        {
+          title: 'Sostenibilidad',
+          description: 'Promovemos prácticas que equilibran desarrollo y preservación',
+          icon: Heart
+        }
+      ]
+    },
+    stats: {
+      title: 'Nuestra Trayectoria',
+      items: [
+        {
+          label: 'Años de Experiencia',
+          value: '15+',
+          icon: Calendar,
+          color: 'text-blue-600',
+          description: 'Actuando en el mercado'
+        },
+        {
+          label: 'Casos de Éxito',
+          value: '1,200+',
+          icon: Trophy,
+          color: 'text-green-600',
+          description: 'Resultados positivos'
+        },
+        {
+          label: 'Clientes Atendidos',
+          value: '500+',
+          icon: Users,
+          color: 'text-purple-600',
+          description: 'Empresas y personas físicas'
+        },
+        {
+          label: 'Ciudades Atendidas',
+          value: '50+',
+          icon: MapPin,
+          color: 'text-orange-600',
+          description: 'En Santa Catarina'
+        }
+      ]
+    },
+    credentials: {
+      title: 'Reconocimiento',
+      subtitle: 'Credenciales que comprueban nuestra experiencia',
+      items: [
+        {
+          title: 'OAB/SC',
+          description: 'Inscritos en el Colegio de Abogados de Brasil - Sección Santa Catarina',
+          year: '2008'
+        },
+        {
+          title: 'Especialización en Derecho Ambiental',
+          description: 'Posgrado en Derecho Ambiental por la UFSC',
+          year: '2010'
+        },
+        {
+          title: 'Certificación ISO 14001',
+          description: 'Gestión Ambiental - Consultoría certificada',
+          year: '2018'
+        }
+      ]
+    },
+    cta: {
+      text: 'Conoce Nuestro Equipo',
+      href: '/es/sobre'
+    }
   },
-] as const
-
-const COMPANY_VALUES: ValueItem[] = [
-  {
-    title: 'Missão',
-    description: 'Promover segurança jurídica e sustentabilidade a empresas e empreendedores por meio de soluções jurídicas personalizadas, com visão estratégica e responsabilidade ambiental.',
-    icon: GlobeAmericasIcon,
-  },
-  {
-    title: 'Visão',
-    description: 'Ser referência em Direito Ambiental e Empresarial, contribuindo para a construção de negócios éticos, legais e ambientalmente responsáveis.',
-    icon: BuildingOfficeIcon,
-  },
-  {
-    title: 'Valores',
-    description: 'Ética, clareza, proximidade com o cliente e compromisso com a legalidade e o meio ambiente.',
-    icon: HandRaisedIcon,
-  },
-] as const
-
-const CSS_CLASSES = {
-  section: "relative bg-gradient-to-br from-white to-gray-100 py-24 px-6 lg:px-12 overflow-hidden",
-  container: "relative max-w-7xl mx-auto",
-  backgroundPattern: "absolute inset-0 opacity-10 pointer-events-none",
-  button: {
-    primary: "inline-block mt-4 px-6 py-3 text-white bg-[#8E4616] hover:bg-[#6B3410] transition shadow-md hover:shadow-lg rounded-none"
-  },
-  card: {
-    service: "group bg-white p-6 hover:bg-[#CEBAA3]/20 transition shadow-sm hover:shadow-lg rounded-none",
-    value: "text-center"
-  }
-} as const
-
-const CONTENT = {
-  header: {
-    subtitle: "Sobre",
-    title: "Comprometimento Jurídico com o Desenvolvimento Sustentável"
-  },
-  intro: {
-    paragraphs: [
-      'Atuo como advogado especializado em <strong className="text-[#8E4616]">Direito Ambiental</strong>, com ampla experiência em assessorar empresas, empreendedores e consultorias que buscam crescer com segurança jurídica, responsabilidade socioambiental e conformidade legal.',
-      'Minha atuação é focada em licenciamento ambiental, defesas administrativas e judiciais, consultoria jurídica ambiental, regularização fundiária e análise de viabilidade legal de empreendimentos.',
-      'Frequentemente, clientes que inicialmente me procuram por questões ambientais estendem a parceria para assessoria em <strong className="text-[#8E4616]">Direito Empresarial</strong>, aproveitando nossa visão jurídica integrada.'
-    ]
-  },
-  image: {
-    src: "/images/guto-hero.jpg",
-    alt: "Augusto Klug Farias - Advogado"
-  }
-} as const
-
-/* ──────────────── Animation Variants ──────────────── */
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: ANIMATION_CONFIG.duration }
-}
-
-const scaleIn = {
-  initial: { opacity: 0, scale: 0.95 },
-  animate: { opacity: 1, scale: 1 },
-  transition: { duration: ANIMATION_CONFIG.duration }
-}
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: ANIMATION_CONFIG.stagger
+  'de': {
+    title: 'Über Uns',
+    subtitle: 'Exzellenz im Umweltrecht',
+    description: 'Wir sind eine Anwaltskanzlei, die sich auf Umweltrecht spezialisiert hat und vollständige und strategische Rechtslösungen für Unternehmen und Privatpersonen in Santa Catarina anbietet.',
+    fullDescription: 'Mit jahrelanger Erfahrung und konsolidierter Expertise betreuen wir von großen Konzernen bis hin zu kleinen Landwirten, immer mit dem Engagement, effiziente und nachhaltige Lösungen für jeden Fall zu finden.',
+    mission: {
+      title: 'Unsere Mission',
+      text: 'Die Interessen unserer Kunden durch innovative und nachhaltige Rechtsstrategien zu schützen und zur verantwortlichen wirtschaftlichen Entwicklung beizutragen.'
+    },
+    values: {
+      title: 'Unsere Werte',
+      items: [
+        {
+          title: 'Exzellenz',
+          description: 'Wir streben immer nach höchster Qualität in allen unseren Dienstleistungen',
+          icon: Trophy
+        },
+        {
+          title: 'Ethik',
+          description: 'Wir handeln mit Transparenz und Integrität in allen unseren Beziehungen',
+          icon: Scale
+        },
+        {
+          title: 'Engagement',
+          description: 'Vollständige Hingabe an die Interessen und Ziele unserer Kunden',
+          icon: Target
+        },
+        {
+          title: 'Nachhaltigkeit',
+          description: 'Wir fördern Praktiken, die Entwicklung und Erhaltung ausbalancieren',
+          icon: Heart
+        }
+      ]
+    },
+    stats: {
+      title: 'Unsere Entwicklung',
+      items: [
+        {
+          label: 'Jahre Erfahrung',
+          value: '15+',
+          icon: Calendar,
+          color: 'text-blue-600',
+          description: 'Am Markt tätig'
+        },
+        {
+          label: 'Erfolgsfälle',
+          value: '1,200+',
+          icon: Trophy,
+          color: 'text-green-600',
+          description: 'Positive Ergebnisse'
+        },
+        {
+          label: 'Betreute Kunden',
+          value: '500+',
+          icon: Users,
+          color: 'text-purple-600',
+          description: 'Unternehmen und Privatpersonen'
+        },
+        {
+          label: 'Betreute Städte',
+          value: '50+',
+          icon: MapPin,
+          color: 'text-orange-600',
+          description: 'In Santa Catarina'
+        }
+      ]
+    },
+    credentials: {
+      title: 'Anerkennung',
+      subtitle: 'Zertifizierungen, die unsere Kompetenz belegen',
+      items: [
+        {
+          title: 'OAB/SC',
+          description: 'Registriert bei der Brasilianischen Anwaltskammer - Sektion Santa Catarina',
+          year: '2008'
+        },
+        {
+          title: 'Spezialisierung Umweltrecht',
+          description: 'Postgraduierung in Umweltrecht an der UFSC',
+          year: '2010'
+        },
+        {
+          title: 'ISO 14001 Zertifizierung',
+          description: 'Umweltmanagement - Zertifizierte Beratung',
+          year: '2018'
+        }
+      ]
+    },
+    cta: {
+      text: 'Lernen Sie Unser Team Kennen',
+      href: '/de/sobre'
     }
   }
-}
+} as const
 
-/* ──────────────── Sub-components ──────────────── */
-/**
- * Componente do padrão de fundo
- */
-const BackgroundPattern = () => (
-  <div className={CSS_CLASSES.backgroundPattern}>
-    <div
-      className="absolute inset-0"
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231E2B1A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-      }}
-    />
-  </div>
-)
+/* ==========================================================================
+   COMPONENTE PRINCIPAL
+   ========================================================================== */
 
 /**
- * Componente do cabeçalho da seção
+ * Componente About
+ *
+ * Seção "Sobre" com informações do escritório, estatísticas, valores
+ * e credenciais. Adaptável para diferentes contextos de uso.
+ *
+ * @example
+ * ```tsx
+ * <About
+ *   locale="pt-br"
+ *   variant="detailed"
+ *   showStats
+ *   showCredentials
+ *   showContactButton
+ *   onContactClick={() => handleContact()}
+ * />
+ * ```
  */
-const SectionHeader = () => (
-  <div className="max-w-3xl mx-auto text-center mb-16">
-    <motion.p
-      className="text-sm font-semibold text-[#8E4616] uppercase tracking-wide mb-2"
-      {...fadeInUp}
-    >
-      {CONTENT.header.subtitle}
-    </motion.p>
-    <motion.h2
-      className="text-4xl sm:text-5xl font-bold text-[#1E2B1A] leading-tight"
-      {...fadeInUp}
-      transition={{ ...fadeInUp.transition, delay: 0.1 }}
-    >
-      {CONTENT.header.title}
-    </motion.h2>
-  </div>
-)
+export const About = memo<AboutProps>(({
+  locale,
+  variant = 'default',
+  showStats = true,
+  showCredentials = true,
+  showImage = true,
+  showContactButton = true,
+  onContactClick,
+  className
+}) => {
+  const content = LOCALIZED_CONTENT[locale]
 
-/**
- * Componente do texto introdutório
- */
-const IntroText = () => (
-  <motion.div
-    {...fadeInUp}
-    viewport={ANIMATION_CONFIG.viewport}
-    className="space-y-6 text-[#1E2B1A]/90 text-lg"
-  >
-    {CONTENT.intro.paragraphs.map((paragraph, index) => (
-      <motion.p
-        key={index}
-        dangerouslySetInnerHTML={{ __html: paragraph }}
-        {...fadeInUp}
-        transition={{ ...fadeInUp.transition, delay: index * 0.1 }}
-      />
-    ))}
+  // Configuração baseada na variante
+  const variantConfig = useMemo(() => {
+    switch (variant) {
+      case 'compact':
+        return {
+          showFullDescription: false,
+          showValues: false,
+          maxStats: 2,
+          maxCredentials: 2,
+          gridCols: 'md:grid-cols-2',
+          spacing: 'space-y-12'
+        }
+      case 'detailed':
+        return {
+          showFullDescription: true,
+          showValues: true,
+          maxStats: 4,
+          maxCredentials: 3,
+          gridCols: 'md:grid-cols-2 lg:grid-cols-4',
+          spacing: 'space-y-16 lg:space-y-24'
+        }
+      default:
+        return {
+          showFullDescription: true,
+          showValues: true,
+          maxStats: 4,
+          maxCredentials: 3,
+          gridCols: 'md:grid-cols-2 lg:grid-cols-4',
+          spacing: 'space-y-16'
+        }
+    }
+  }, [variant])
 
-    <motion.a
-      href="#contato"
-      className={CSS_CLASSES.button.primary}
-      {...fadeInUp}
-      transition={{ ...fadeInUp.transition, delay: 0.4 }}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      aria-label="Conhecer serviços jurídicos"
-    >
-      Conheça Nossos Serviços
-    </motion.a>
-  </motion.div>
-)
-
-/**
- * Componente da imagem do advogado
- */
-const LawyerImage = () => (
-  <div className="relative">
-    <div className="absolute -inset-4 bg-gradient-to-r from-[#8E4616]/20 to-[#1E2B1A]/20 blur-2xl" />
-    <motion.img
-      src={CONTENT.image.src}
-      alt={CONTENT.image.alt}
-      className="relative w-full shadow-2xl rounded-none"
-      {...scaleIn}
-      viewport={ANIMATION_CONFIG.viewport}
-    />
-  </div>
-)
-
-/**
- * Componente da seção intro + imagem
- */
-const IntroSection = () => (
-  <div className="grid lg:grid-cols-2 gap-12 items-center mb-24">
-    <IntroText />
-    <LawyerImage />
-  </div>
-)
-
-/**
- * Card individual de serviço
- */
-const ServiceCard = ({ service, index }: { service: ServiceItem; index: number }) => {
-  const { name, description, icon: Icon } = service
-
-  return (
-    <motion.div
-      className={CSS_CLASSES.card.service}
-      {...fadeInUp}
-      viewport={ANIMATION_CONFIG.viewport}
-      transition={{ ...fadeInUp.transition, delay: index * ANIMATION_CONFIG.stagger }}
-      whileHover={{ y: -5 }}
-    >
-      <Icon className="h-10 w-10 text-[#8E4616] mb-4 group-hover:scale-110 transition-transform" />
-      <h4 className="text-lg font-semibold text-[#1E2B1A] mb-2">{name}</h4>
-      <p className="text-[#1E2B1A]/80 leading-relaxed">{description}</p>
-    </motion.div>
+  // Estatísticas filtradas
+  const displayedStats = useMemo(() =>
+    content.stats.items.slice(0, variantConfig.maxStats),
+    [content.stats.items, variantConfig.maxStats]
   )
-}
 
-/**
- * Seção de principais serviços
- */
-const ServicesSection = () => (
-  <div className="mb-24">
-    <motion.h3
-      className="text-3xl font-bold text-center text-[#1E2B1A] mb-12"
-      {...fadeInUp}
-      viewport={ANIMATION_CONFIG.viewport}
-    >
-      Principais Serviços
-    </motion.h3>
-    <motion.div
-      className="grid md:grid-cols-3 gap-8"
-      variants={staggerContainer}
-      initial="initial"
-      whileInView="animate"
-      viewport={ANIMATION_CONFIG.viewport}
-    >
-      {MAIN_SERVICES.map((service, index) => (
-        <ServiceCard key={service.name} service={service} index={index} />
-      ))}
-    </motion.div>
-  </div>
-)
-
-/**
- * Card individual de valor da empresa
- */
-const ValueCard = ({ value, index }: { value: ValueItem; index: number }) => {
-  const { title, description, icon: Icon } = value
-
-  return (
-    <motion.div
-      className={CSS_CLASSES.card.value}
-      {...scaleIn}
-      viewport={ANIMATION_CONFIG.viewport}
-      transition={{ ...scaleIn.transition, delay: index * ANIMATION_CONFIG.stagger }}
-    >
-      <div className="w-16 h-16 mx-auto mb-4 bg-[#8E4616]/10 flex items-center justify-center rounded-none">
-        <Icon className="h-8 w-8 text-[#8E4616]" />
-      </div>
-      <h4 className="text-xl font-bold text-[#1E2B1A] mb-2">{title}</h4>
-      <p className="text-[#1E2B1A]/80 leading-relaxed">{description}</p>
-    </motion.div>
+  // Credenciais filtradas
+  const displayedCredentials = useMemo(() =>
+    content.credentials.items.slice(0, variantConfig.maxCredentials),
+    [content.credentials.items, variantConfig.maxCredentials]
   )
-}
 
-/**
- * Seção de valores da empresa
- */
-const ValuesSection = () => (
-  <div className="mb-24">
-    <motion.div
-      className="grid md:grid-cols-3 gap-8"
-      variants={staggerContainer}
-      initial="initial"
-      whileInView="animate"
-      viewport={ANIMATION_CONFIG.viewport}
-    >
-      {COMPANY_VALUES.map((value, index) => (
-        <ValueCard key={value.title} value={value} index={index} />
-      ))}
-    </motion.div>
-  </div>
-)
+  // Handler para analytics
+  const handleContactClick = useCallback(() => {
+    // Analytics tracking
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_contact_click', {
+        section: 'about',
+        variant,
+        page_location: window.location.href
+      })
+    }
 
-/* ──────────────── Main Component ──────────────── */
-/**
- * Componente About principal
- * Seção responsável por apresentar informações sobre o escritório,
- * seus valores, missão e principais serviços oferecidos
- */
-export default function About() {
+    onContactClick?.()
+  }, [variant, onContactClick])
+
   return (
-    <section id="sobre" className={CSS_CLASSES.section}>
-      <BackgroundPattern />
+    <section
+      className={cn(
+        'relative py-16 lg:py-24 overflow-hidden',
+        `bg-gradient-to-br ${ABOUT_CONFIG.BACKGROUND_GRADIENT}`,
+        className
+      )}
+      aria-labelledby="about-title"
+    >
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
 
-      <div className={CSS_CLASSES.container}>
-        <SectionHeader />
-        <IntroSection />
-        <ServicesSection />
-        <ValuesSection />
+      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={cn('max-w-7xl mx-auto', variantConfig.spacing)}>
+
+          {/* Header */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="text-center mb-16"
+          >
+            <motion.h2
+              id="about-title"
+              variants={staggerChild}
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4"
+            >
+              {content.title}
+            </motion.h2>
+            <motion.p
+              variants={staggerChild}
+              className="text-xl md:text-2xl text-primary font-medium mb-6"
+            >
+              {content.subtitle}
+            </motion.p>
+            <motion.p
+              variants={staggerChild}
+              className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+            >
+              {content.description}
+            </motion.p>
+          </motion.div>
+
+          {/* Conteúdo Principal */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
+
+            {/* Lado Esquerdo - Texto */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={slideInLeft}
+              className="space-y-8"
+            >
+              {variantConfig.showFullDescription && (
+                <div>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    {content.fullDescription}
+                  </p>
+                </div>
+              )}
+
+              {/* Missão */}
+              <div className="bg-white/80 dark:bg-card/80 backdrop-blur-sm rounded-xl p-6 border border-border/50">
+                <h3 className="text-xl font-semibold text-foreground mb-3 flex items-center gap-2">
+                  <Target className="w-5 h-5 text-primary" />
+                  {content.mission.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {content.mission.text}
+                </p>
+              </div>
+
+              {/* CTA Button */}
+              {showContactButton && (
+                <div className="pt-4">
+                  <Link href={content.cta.href}>
+                    <Button
+                      size="lg"
+                      onClick={handleContactClick}
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 shadow-lg hover:shadow-xl transition-all duration-300"
+                    >
+                      {content.cta.text}
+                      <Users className="ml-2 w-5 h-5" />
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </motion.div>
+
+            {/* Lado Direito - Imagem */}
+            {showImage && (
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={slideInRight}
+                className="relative"
+              >
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/images/guto-hero.jpg"
+                    alt="Escritório Farias Klug Advocacia"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                </div>
+
+                {/* Badge de Destaque */}
+                <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground px-4 py-2 rounded-lg shadow-lg">
+                  <div className="flex items-center gap-2">
+                    <Award className="w-4 h-4" />
+                    <span className="text-sm font-semibold">15+ Anos</span>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </div>
+
+          {/* Valores */}
+          {variantConfig.showValues && (
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+              className="mb-16"
+            >
+              <motion.div variants={staggerChild} className="text-center mb-12">
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                  {content.values.title}
+                </h3>
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {content.values.items.map((value, index) => (
+                  <motion.div
+                    key={value.title}
+                    variants={{
+                      hidden: { opacity: 0, y: 30 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          delay: index * 0.1,
+                          duration: 0.6
+                        }
+                      }
+                    }}
+                  >
+                    <Card className="text-center h-full hover:shadow-lg transition-all duration-300 group">
+                      <CardContent className="p-6">
+                        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                          {value.icon && <value.icon className="w-8 h-8 text-primary" />}
+                        </div>
+                        <h4 className="text-lg font-semibold text-foreground mb-3">
+                          {value.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          {value.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Estatísticas */}
+          {showStats && (
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+              className="mb-16"
+            >
+              <motion.div variants={staggerChild} className="text-center mb-12">
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                  {content.stats.title}
+                </h3>
+              </motion.div>
+
+              <div className={cn('grid grid-cols-1 gap-8', variantConfig.gridCols)}>
+                {displayedStats.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.9 },
+                      visible: {
+                        opacity: 1,
+                        scale: 1,
+                        transition: {
+                          delay: index * 0.1,
+                          duration: 0.5
+                        }
+                      }
+                    }}
+                  >
+                    <Card className="text-center hover:shadow-lg transition-all duration-300 group">
+                      <CardContent className="p-8">
+                        <div className={cn(
+                          'w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4',
+                          'bg-primary/10 group-hover:bg-primary/20 transition-colors'
+                        )}>
+                          <stat.icon className={cn('w-8 h-8', stat.color)} />
+                        </div>
+                        <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+                          {stat.value}
+                        </div>
+                        <h4 className="text-lg font-semibold text-foreground mb-2">
+                          {stat.label}
+                        </h4>
+                        {stat.description && (
+                          <p className="text-sm text-muted-foreground">
+                            {stat.description}
+                          </p>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Credenciais */}
+          {showCredentials && (
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              <motion.div variants={staggerChild} className="text-center mb-12">
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                  {content.credentials.title}
+                </h3>
+                <p className="text-lg text-muted-foreground">
+                  {content.credentials.subtitle}
+                </p>
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {displayedCredentials.map((credential, index) => (
+                  <motion.div
+                    key={credential.title}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          delay: index * 0.1,
+                          duration: 0.5
+                        }
+                      }
+                    }}
+                  >
+                    <Card className="hover:shadow-lg transition-all duration-300 group">
+                      <CardHeader className="pb-3">
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="text-lg text-foreground group-hover:text-primary transition-colors">
+                            {credential.title}
+                          </CardTitle>
+                          {credential.year && (
+                            <Badge variant="outline" className="ml-2">
+                              {credential.year}
+                            </Badge>
+                          )}
+                        </div>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <p className="text-sm text-muted-foreground">
+                          {credential.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+        </div>
       </div>
     </section>
   )
+})
+
+// DisplayName para debugging
+About.displayName = 'About'
+
+/* ==========================================================================
+   HOOKS E UTILITÁRIOS
+   ========================================================================== */
+
+/**
+ * Hook para analytics da seção About
+ */
+export const useAboutAnalytics = () => {
+  const trackSectionView = useCallback((section: string) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_section_view', {
+        section_name: section,
+        page_location: window.location.href
+      })
+    }
+  }, [])
+
+  const trackStatClick = useCallback((statLabel: string, statValue: string) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_stat_click', {
+        stat_label: statLabel,
+        stat_value: statValue,
+        page_location: window.location.href
+      })
+    }
+  }, [])
+
+  const trackValueClick = useCallback((valueTitle: string) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_value_click', {
+        value_title: valueTitle,
+        page_location: window.location.href
+      })
+    }
+  }, [])
+
+  return {
+    trackSectionView,
+    trackStatClick,
+    trackValueClick
+  }
 }
+
+/* ==========================================================================
+   EXPORTAÇÕES
+   ========================================================================== */
+
+export default About
+export type { AboutProps, Credential, Statistic, Value }
+

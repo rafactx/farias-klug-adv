@@ -374,3 +374,6 @@ export const siteUtils = {
 // Tipo para autocompletar configurações
 export type SiteConfig = typeof siteConfig
 export type SiteFeatures = keyof typeof siteConfig.features
+
+// Alias para compatibilidade
+export const SITE_CONFIG = siteConfig
