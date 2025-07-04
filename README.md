@@ -33,22 +33,6 @@ Start editing the UI by modifying components inside `src/app/` and `src/componen
 
 ---
 
-## Folder Structure
-
-```
-🔹 public/                 → Static assets (images, logos)
-🔹 src/
-│   ├── app/               → Routes, layout and pages
-│   ├── components/        → Shared UI components
-│   └── lib/               → Utilities and helpers
-🔹 tailwind.config.js     → Tailwind CSS configuration
-🔹 next.config.ts         → Next.js config
-🔹 tsconfig.json          → TypeScript config
-🔹 README.md
-```
-
----
-
 ## Development Features
 
 * Animated hero section with parallax and scroll hint
