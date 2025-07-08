@@ -1,0 +1,9 @@
+packages:
+  - gemini-cli/packages/*
+
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - esbuild
+  - protobufjs
+  - sharp
+  - unrs-resolver
