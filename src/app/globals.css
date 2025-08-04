@@ -1,0 +1,479 @@
+@import '@tailwindcss/postcss';
+
+/* Austera Text Font Family */
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-ExtraLight.woff2') format('woff2'),
+         url('/fonts/AusteraText-ExtraLight.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-ExtraLightItalic.woff2') format('woff2'),
+         url('/fonts/AusteraText-ExtraLightItalic.woff') format('woff');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-Light.woff2') format('woff2'),
+         url('/fonts/AusteraText-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-LightItalic.woff2') format('woff2'),
+         url('/fonts/AusteraText-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-Regular.woff2') format('woff2'),
+         url('/fonts/AusteraText-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-Italic.woff2') format('woff2'),
+         url('/fonts/AusteraText-Italic.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-Medium.woff2') format('woff2'),
+         url('/fonts/AusteraText-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-MediumItalic.woff2') format('woff2'),
+         url('/fonts/AusteraText-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-DemiBold.woff2') format('woff2'),
+         url('/fonts/AusteraText-DemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-DemiBoldItalic.woff2') format('woff2'),
+         url('/fonts/AusteraText-DemiBoldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-Bold.woff2') format('woff2'),
+         url('/fonts/AusteraText-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Austera Text';
+    src: url('/fonts/AusteraText-BoldItalic.woff2') format('woff2'),
+         url('/fonts/AusteraText-BoldItalic.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Tailwind v4 CSS Variables for Brand System */
+@layer base {
+  :root {
+    /* Typography Scale - Austera Text */
+    --font-primary: 'Austera Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+    /* Font Weights */
+    --font-weight-extralight: 200;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Typography Scale */
+    --text-xs: 0.75rem;      /* 12px */
+    --text-sm: 0.875rem;     /* 14px */
+    --text-base: 1rem;       /* 16px */
+    --text-lg: 1.125rem;     /* 18px */
+    --text-xl: 1.25rem;      /* 20px */
+    --text-2xl: 1.5rem;      /* 24px */
+    --text-3xl: 1.875rem;    /* 30px */
+    --text-4xl: 2.25rem;     /* 36px */
+    --text-5xl: 3rem;        /* 48px */
+    --text-6xl: 3.75rem;     /* 60px */
+    --text-7xl: 4.5rem;      /* 72px */
+
+    /* Line Heights */
+    --leading-none: 1;
+    --leading-tight: 1.25;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --leading-loose: 2;
+
+    /* Spacing Scale (to be extracted from design) */
+    --spacing-xs: 0.25rem;   /* 4px */
+    --spacing-sm: 0.5rem;    /* 8px */
+    --spacing-md: 1rem;      /* 16px */
+    --spacing-lg: 1.5rem;    /* 24px */
+    --spacing-xl: 2rem;      /* 32px */
+    --spacing-2xl: 3rem;     /* 48px */
+    --spacing-3xl: 4rem;     /* 64px */
+
+        /* Brand Colors - Farias Klug Advocacia */
+    /* Primary: Verde Escuro (Verde Jurídico) */
+    --color-primary-50: #f0f2f0;
+    --color-primary-100: #d9ddd7;
+    --color-primary-200: #b3bfac;
+    --color-primary-300: #8da082;
+    --color-primary-400: #678157;
+    --color-primary-500: #1E2B1A; /* Verde principal */
+    --color-primary-600: #1a251a;
+    --color-primary-700: #151e15;
+    --color-primary-800: #101810;
+    --color-primary-900: #0a120a;
+    --color-primary-950: #050905;
+    --color-primary-foreground: #ffffff;
+
+    /* Secondary: Terracota (Acento Elegante) */
+    --color-secondary-50: #fdf4f0;
+    --color-secondary-100: #fae5d9;
+    --color-secondary-200: #f5cab3;
+    --color-secondary-300: #efaf8d;
+    --color-secondary-400: #ea9467;
+    --color-secondary-500: #8E4616; /* Terracota principal */
+    --color-secondary-600: #A74C18; /* Hover state */
+    --color-secondary-700: #7a3f14;
+    --color-secondary-800: #6d3812;
+    --color-secondary-900: #5f3110;
+    --color-secondary-950: #52290e;
+    --color-secondary-foreground: #ffffff;
+
+    /* Neutral: Bege e Tons Terra */
+    --color-neutral-50: #F9F8F6; /* Papel claro */
+    --color-neutral-100: #F1ECE6; /* Fundo suave */
+    --color-neutral-200: #E5DDD1;
+    --color-neutral-300: #CEBAA3; /* Bege principal */
+    --color-neutral-400: #B7A48B;
+    --color-neutral-500: #A08E73;
+    --color-neutral-600: #89785B;
+    --color-neutral-700: #726243;
+    --color-neutral-800: #5B4C2B;
+    --color-neutral-900: #443613;
+    --color-neutral-950: #2D2008;
+
+    /* Semantic Colors */
+    --color-background: var(--color-neutral-50);
+    --color-foreground: var(--color-neutral-900);
+    --color-card: #ffffff;
+    --color-card-foreground: var(--color-neutral-900);
+    --color-popover: #ffffff;
+    --color-popover-foreground: var(--color-neutral-900);
+    --color-muted: var(--color-neutral-100);
+    --color-muted-foreground: var(--color-neutral-500);
+    --color-accent: var(--color-neutral-100);
+    --color-accent-foreground: var(--color-neutral-900);
+    --color-border: var(--color-neutral-200);
+    --color-input: var(--color-neutral-200);
+    --color-ring: var(--color-primary-500);
+
+    /* Breakpoints for mobile-first design */
+    --breakpoint-xs: 320px;
+    --breakpoint-sm: 375px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1440px;
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      /* Inverted primary for dark mode */
+      --color-primary-50: #050905;
+      --color-primary-100: #0a120a;
+      --color-primary-500: #678157; /* Verde mais claro para contraste */
+      --color-primary-900: #d9ddd7;
+      --color-primary-foreground: #0a120a;
+
+      /* Ajustados para dark mode */
+      --color-secondary-500: #ea9467; /* Terracota mais clara */
+      --color-secondary-600: #efaf8d; /* Hover mais claro */
+      --color-secondary-foreground: #2D2008;
+
+      /* Neutros invertidos */
+      --color-neutral-50: #2D2008; /* Fundo escuro */
+      --color-neutral-100: #443613;
+      --color-neutral-900: #F1ECE6; /* Texto claro */
+
+      /* Semantic colors para dark mode */
+      --color-background: var(--color-neutral-50);
+      --color-foreground: var(--color-neutral-900);
+      --color-card: #443613;
+      --color-card-foreground: var(--color-neutral-900);
+      --color-muted: var(--color-neutral-100);
+      --color-muted-foreground: var(--color-neutral-400);
+      --color-border: var(--color-neutral-700);
+      --color-input: var(--color-neutral-700);
+    }
+  }
+
+  /* Base typography */
+  body {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-normal);
+    color: var(--color-neutral-900);
+  }
+
+  /* Heading hierarchy using Austera Text */
+  h1 {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-6xl);
+    line-height: var(--leading-tight);
+  }
+
+  h2 {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--text-4xl);
+    line-height: var(--leading-tight);
+  }
+
+  h3 {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--text-2xl);
+    line-height: var(--leading-snug);
+  }
+
+  h4 {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+
+  h5 {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-lg);
+    line-height: var(--leading-normal);
+  }
+
+  h6 {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+  }
+
+  /* Responsive typography */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: var(--text-4xl);
+    }
+
+    h2 {
+      font-size: var(--text-3xl);
+    }
+  }
+}
+
+/* Utility classes for Austera Text */
+.font-austera {
+  font-family: var(--font-primary);
+}
+
+.font-austera-extralight {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-extralight);
+}
+
+.font-austera-light {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-light);
+}
+
+.font-austera-medium {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.font-austera-semibold {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.font-austera-bold {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Smooth scrolling and animations for Task 4 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* === ENHANCED ANIMATIONS & MICRO-INTERACTIONS === */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.6s ease-out;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Animation delays */
+.animation-delay-100 {
+  animation-delay: 0.1s;
+  animation-fill-mode: both;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+  animation-fill-mode: both;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+  animation-fill-mode: both;
+}
+
+.animation-delay-500 {
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+  animation-fill-mode: both;
+}
+
+.animation-delay-700 {
+  animation-delay: 0.7s;
+  animation-fill-mode: both;
+}
+
+.animation-delay-800 {
+  animation-delay: 0.8s;
+  animation-fill-mode: both;
+}
+
+/* Micro-interactions */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(30, 43, 26, 0.2);
+}
+
+/* Text effects */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-secondary-500) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-shadow-soft {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

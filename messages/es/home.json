@@ -1,0 +1,48 @@
+{
+  "hero": {
+    "headline": "Especialistas en Derecho Ambiental y Empresarial",
+    "subheadline": "Soluciones legales estratégicas para empresas e individuos que buscan excelencia y resultados sostenibles",
+    "cta_primary": "Programar una Consulta",
+    "cta_secondary": "Conocer Nuestros Servicios"
+  },
+  "about": {
+    "title": "Acerca de Nosotros",
+    "subtitle": "Tradición e Innovación en la Abogacía",
+    "description": "Con décadas de experiencia, ofrecemos asesoría legal especializada en Derecho Ambiental y Empresarial, combinando conocimiento técnico profundo con un enfoque estratégico personalizado para cada cliente."
+  },
+  "practice_areas": {
+    "title": "Áreas de Práctica",
+    "environmental": {
+      "title": "Derecho Ambiental",
+      "description": "Licenciamiento ambiental, cumplimiento normativo, y consultoría para sostenibilidad empresarial"
+    },
+    "corporate": {
+      "title": "Derecho Empresarial",
+      "description": "Constitución de empresas, contratos, fusiones y adquisiciones, y gobernanza corporativa"
+    },
+    "compliance": {
+      "title": "Cumplimiento Normativo",
+      "description": "Programas de integridad, auditoría legal y prevención de riesgos regulatorios"
+    }
+  },
+  "cases": {
+    "title": "Casos de Éxito",
+    "case1": {
+      "title": "Licenciamiento Ambiental Complejo",
+      "description": "Obtuvimos licenciamiento para proyecto industrial de gran escala en tiempo récord"
+    },
+    "case2": {
+      "title": "Reestructuración Empresarial",
+      "description": "Conducimos fusión estratégica resultando en ahorro del 30% en costos operacionales"
+    }
+  },
+  "team": {
+    "title": "Nuestro Equipo",
+    "subtitle": "Profesionales especializados y comprometidos con la excelencia"
+  },
+  "cta_section": {
+    "title": "¿Listo para resolver su asunto legal?",
+    "description": "Contáctanos y descubre cómo podemos ayudar a su empresa a crecer de forma sostenible y segura.",
+    "button": "Hablar con un Especialista"
+  }
+}

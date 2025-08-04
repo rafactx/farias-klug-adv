@@ -1,0 +1,28 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "about": "À propos",
+    "practice_areas": "Domaines de pratique",
+    "cases": "Cas",
+    "content": "Contenu",
+    "team": "Équipe",
+    "contact": "Contact"
+  },
+  "buttons": {
+    "contact_us": "Nous contacter",
+    "whatsapp": "Parler sur WhatsApp",
+    "send_message": "Envoyer un message",
+    "learn_more": "En savoir plus",
+    "view_all": "Voir tout"
+  },
+  "footer": {
+    "all_rights_reserved": "Tous droits réservés"
+  },
+  "language": {
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español",
+    "german": "Deutsch",
+    "french": "Français"
+  }
+}

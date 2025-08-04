@@ -1,0 +1,41 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "practice_areas": "Áreas de Práctica",
+    "cases": "Casos",
+    "content": "Contenido",
+    "team": "Equipo",
+    "contact": "Contacto"
+  },
+  "buttons": {
+    "contact_us": "Contáctanos",
+    "whatsapp": "Hablar por WhatsApp",
+    "send_message": "Enviar Mensaje",
+    "learn_more": "Saber Más",
+    "view_all": "Ver Todos"
+  },
+  "contact": {
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "message": "Mensaje",
+    "subject": "Asunto",
+    "send": "Enviar",
+    "required_field": "Campo obligatorio",
+    "success_message": "¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
+    "error_message": "Error al enviar mensaje. Inténtelo de nuevo."
+  },
+  "footer": {
+    "all_rights_reserved": "Todos los derechos reservados",
+    "privacy_policy": "Política de Privacidad",
+    "terms_of_service": "Términos de Servicio"
+  },
+  "language": {
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español",
+    "german": "Deutsch",
+    "french": "Français"
+  }
+}

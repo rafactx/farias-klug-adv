@@ -1,0 +1,41 @@
+{
+    "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "team": "Team",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "contact_cta": "Get in Touch"
+  },
+  "buttons": {
+    "contact_us": "Contact Us",
+    "whatsapp": "Contact via WhatsApp",
+    "send_message": "Send Message",
+    "learn_more": "Learn More",
+    "view_all": "View All"
+  },
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "subject": "Subject",
+    "send": "Send",
+    "required_field": "Required field",
+    "success_message": "Message sent successfully! We will contact you soon.",
+    "error_message": "Error sending message. Please try again."
+  },
+  "footer": {
+    "all_rights_reserved": "All rights reserved",
+    "privacy_policy": "Privacy Policy",
+    "terms_of_service": "Terms of Service"
+  },
+  "language": {
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español",
+    "german": "Deutsch",
+    "french": "Français"
+  }
+}

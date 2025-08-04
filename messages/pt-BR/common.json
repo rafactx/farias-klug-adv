@@ -1,0 +1,41 @@
+{
+  "navigation": {
+    "home": "Início",
+    "about": "Sobre",
+    "services": "Serviços",
+    "team": "Equipe",
+    "faq": "FAQ",
+    "contact": "Contato",
+    "contact_cta": "Fale Conosco"
+  },
+  "buttons": {
+    "contact_us": "Entre em Contato",
+    "whatsapp": "Falar no WhatsApp",
+    "send_message": "Enviar Mensagem",
+    "learn_more": "Saiba Mais",
+    "view_all": "Ver Todos"
+  },
+  "contact": {
+    "name": "Nome",
+    "email": "E-mail",
+    "phone": "Telefone",
+    "message": "Mensagem",
+    "subject": "Assunto",
+    "send": "Enviar",
+    "required_field": "Campo obrigatório",
+    "success_message": "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+    "error_message": "Erro ao enviar mensagem. Tente novamente."
+  },
+  "footer": {
+    "all_rights_reserved": "Todos os direitos reservados",
+    "privacy_policy": "Política de Privacidade",
+    "terms_of_service": "Termos de Serviço"
+  },
+  "language": {
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español",
+    "german": "Deutsch",
+    "french": "Français"
+  }
+}

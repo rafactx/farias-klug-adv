@@ -1,0 +1,48 @@
+{
+  "hero": {
+    "headline": "Especialistas em Direito Ambiental e Empresarial",
+    "subheadline": "Soluções jurídicas estratégicas para empresas e indivíduos que buscam excelência e resultados sustentáveis",
+    "cta_primary": "Agende uma Consulta",
+    "cta_secondary": "Conheça Nossos Serviços"
+  },
+  "about": {
+    "title": "Sobre Nós",
+    "subtitle": "Tradição e Inovação em Advocacia",
+    "description": "Com décadas de experiência, oferecemos assessoria jurídica especializada em Direito Ambiental e Empresarial, combinando conhecimento técnico profundo com uma abordagem estratégica personalizada para cada cliente."
+  },
+  "practice_areas": {
+    "title": "Áreas de Atuação",
+    "environmental": {
+      "title": "Direito Ambiental",
+      "description": "Licenciamento ambiental, compliance, e consultoria para sustentabilidade empresarial"
+    },
+    "corporate": {
+      "title": "Direito Empresarial",
+      "description": "Constituição de empresas, contratos, fusões e aquisições, e governança corporativa"
+    },
+    "compliance": {
+      "title": "Compliance",
+      "description": "Programas de integridade, auditoria jurídica e prevenção de riscos regulatórios"
+    }
+  },
+  "cases": {
+    "title": "Cases de Sucesso",
+    "case1": {
+      "title": "Licenciamento Ambiental Complexo",
+      "description": "Obtivemos licenciamento para projeto industrial de grande porte em tempo recorde"
+    },
+    "case2": {
+      "title": "Reestruturação Empresarial",
+      "description": "Conduzimos fusão estratégica resultando em economia de 30% em custos operacionais"
+    }
+  },
+  "team": {
+    "title": "Nossa Equipe",
+    "subtitle": "Profissionais especializados e comprometidos com a excelência"
+  },
+  "cta_section": {
+    "title": "Pronto para resolver sua questão jurídica?",
+    "description": "Entre em contato conosco e descubra como podemos ajudar sua empresa a crescer de forma sustentável e segura.",
+    "button": "Falar com Especialista"
+  }
+}

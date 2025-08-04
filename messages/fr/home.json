@@ -1,0 +1,48 @@
+{
+  "hero": {
+    "headline": "Spécialistes en Droit Environnemental et des Affaires",
+    "subheadline": "Solutions juridiques stratégiques pour entreprises et particuliers",
+    "cta_primary": "Programmer une consultation",
+    "cta_secondary": "Découvrir nos services"
+  },
+  "about": {
+    "title": "À propos de nous",
+    "subtitle": "Tradition et innovation dans la pratique juridique",
+    "description": "Avec des décennies d'expérience, nous offrons des conseils juridiques spécialisés."
+  },
+  "practice_areas": {
+    "title": "Domaines de pratique",
+    "environmental": {
+      "title": "Droit Environnemental",
+      "description": "Licences environnementales, conformité et conseil en durabilité"
+    },
+    "corporate": {
+      "title": "Droit des Affaires",
+      "description": "Formation d'entreprises, contrats et gouvernance corporative"
+    },
+    "compliance": {
+      "title": "Conformité",
+      "description": "Programmes d'intégrité et gestion des risques"
+    }
+  },
+  "cases": {
+    "title": "Cas de Succès",
+    "case1": {
+      "title": "Licence Environnementale Complexe",
+      "description": "Obtention de licence pour projet majeur en temps record"
+    },
+    "case2": {
+      "title": "Restructuration d'Entreprise",
+      "description": "Fusion stratégique avec 30% d'économies opérationnelles"
+    }
+  },
+  "team": {
+    "title": "Notre Équipe",
+    "subtitle": "Professionnels spécialisés engagés vers l'excellence"
+  },
+  "cta_section": {
+    "title": "Prêt à résoudre votre question juridique?",
+    "description": "Contactez-nous et découvrez comment nous pouvons aider votre entreprise.",
+    "button": "Parler à un spécialiste"
+  }
+}

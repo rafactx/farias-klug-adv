@@ -1,0 +1,48 @@
+{
+  "hero": {
+    "headline": "Environmental and Corporate Law Specialists",
+    "subheadline": "Strategic legal solutions for companies and individuals seeking excellence and sustainable results",
+    "cta_primary": "Schedule a Consultation",
+    "cta_secondary": "Learn About Our Services"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Tradition and Innovation in Legal Practice",
+    "description": "With decades of experience, we provide specialized legal advisory in Environmental and Corporate Law, combining deep technical knowledge with a personalized strategic approach for each client."
+  },
+  "practice_areas": {
+    "title": "Practice Areas",
+    "environmental": {
+      "title": "Environmental Law",
+      "description": "Environmental licensing, compliance, and consulting for corporate sustainability"
+    },
+    "corporate": {
+      "title": "Corporate Law",
+      "description": "Company formation, contracts, mergers and acquisitions, and corporate governance"
+    },
+    "compliance": {
+      "title": "Compliance",
+      "description": "Integrity programs, legal auditing, and regulatory risk prevention"
+    }
+  },
+  "cases": {
+    "title": "Success Cases",
+    "case1": {
+      "title": "Complex Environmental Licensing",
+      "description": "We obtained licensing for a large-scale industrial project in record time"
+    },
+    "case2": {
+      "title": "Corporate Restructuring",
+      "description": "We led a strategic merger resulting in 30% savings in operational costs"
+    }
+  },
+  "team": {
+    "title": "Our Team",
+    "subtitle": "Specialized professionals committed to excellence"
+  },
+  "cta_section": {
+    "title": "Ready to solve your legal matter?",
+    "description": "Contact us and discover how we can help your company grow sustainably and securely.",
+    "button": "Talk to a Specialist"
+  }
+}

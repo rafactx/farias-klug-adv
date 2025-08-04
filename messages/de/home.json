@@ -1,0 +1,48 @@
+{
+  "hero": {
+    "headline": "Spezialisten für Umwelt- und Unternehmensrecht",
+    "subheadline": "Strategische Rechtsberatung für Unternehmen und Privatpersonen",
+    "cta_primary": "Beratung vereinbaren",
+    "cta_secondary": "Unsere Services kennenlernen"
+  },
+  "about": {
+    "title": "Über uns",
+    "subtitle": "Tradition und Innovation in der Rechtsberatung",
+    "description": "Mit jahrzehntelanger Erfahrung bieten wir spezialisierte Rechtsberatung."
+  },
+  "practice_areas": {
+    "title": "Praxisbereiche",
+    "environmental": {
+      "title": "Umweltrecht",
+      "description": "Umweltlizenzierung, Compliance und Nachhaltigkeitsberatung"
+    },
+    "corporate": {
+      "title": "Unternehmensrecht",
+      "description": "Unternehmensgründung, Verträge und Corporate Governance"
+    },
+    "compliance": {
+      "title": "Compliance",
+      "description": "Integritätsprogramme und Risikomanagement"
+    }
+  },
+  "cases": {
+    "title": "Erfolgsgeschichten",
+    "case1": {
+      "title": "Komplexe Umweltlizenzierung",
+      "description": "Erfolgreiche Lizenzierung eines Großprojekts in Rekordzeit"
+    },
+    "case2": {
+      "title": "Unternehmensrestrukturierung",
+      "description": "Strategische Fusion mit 30% Kosteneinsparung"
+    }
+  },
+  "team": {
+    "title": "Unser Team",
+    "subtitle": "Spezialisierte Experten mit Fokus auf Exzellenz"
+  },
+  "cta_section": {
+    "title": "Bereit, Ihr Rechtsproblem zu lösen?",
+    "description": "Kontaktieren Sie uns und entdecken Sie, wie wir Ihr Unternehmen unterstützen können.",
+    "button": "Mit Spezialisten sprechen"
+  }
+}
