@@ -1,7 +1,9 @@
+'use client';
+
 import ContactForm from '@/components/ContactForm';
 import Navigation from '@/components/Navigation';
-import { Badge, Button, Card, CardContent, CardDescription, CardTitle, Container, FAQ, Heading, Paragraph } from '@/components/ui';
-import { VisualEnhancements, BackgroundPattern, ScrollProgress } from '@/components/VisualEnhancements';
+import { Button, Card, CardContent, CardDescription, CardTitle, Container, FAQ, Heading, Paragraph } from '@/components/ui';
+import { BackgroundPattern, ScrollProgress, VisualEnhancements } from '@/components/VisualEnhancements';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { useTranslations } from 'next-intl';
 
@@ -142,7 +144,7 @@ export default function Home() {
               className="flex flex-col items-center text-[var(--color-neutral-500)] hover:text-[var(--color-primary-500)] transition-colors duration-300"
               aria-label="Scroll para próxima seção"
             >
-              <Paragraph size="xs" className="mb-2 font-austera-medium">Role para baixo</Paragraph>
+              <Paragraph size="sm" className="mb-2 font-austera-medium">Role para baixo</Paragraph>
               <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
@@ -296,7 +298,7 @@ export default function Home() {
 
             <div className="grid md:grid-cols-2 gap-8">
               {/* 1. Defesas e Recursos Ambientais */}
-              <Card variant="paper" padding="lg" className="hover-lift group fade-in-viewport"
+              <Card variant="paper" padding="lg" className="hover-lift group fade-in-viewport">
                 <CardContent>
                   <div className="flex items-start space-x-4">
                     <div className="w-16 h-16 bg-[var(--color-primary-100)] rounded-xl flex items-center justify-center group-hover:bg-[var(--color-primary-500)] transition-colors duration-300">
@@ -337,7 +339,7 @@ export default function Home() {
               </Card>
 
               {/* 2. Licenciamento e Regularização */}
-              <Card variant="paper" padding="lg" className="hover-lift group fade-in-viewport"
+              <Card variant="paper" padding="lg" className="hover-lift group fade-in-viewport">
                 <CardContent>
                   <div className="flex items-start space-x-4">
                     <div className="w-16 h-16 bg-[var(--color-secondary-100)] rounded-xl flex items-center justify-center group-hover:bg-[var(--color-secondary-500)] transition-colors duration-300">
@@ -378,7 +380,7 @@ export default function Home() {
               </Card>
 
               {/* 3. Consultoria Jurídica Ambiental */}
-              <Card variant="paper" padding="lg" className="hover-lift group fade-in-viewport"
+              <Card variant="paper" padding="lg" className="hover-lift group fade-in-viewport">
                 <CardContent>
                   <div className="flex items-start space-x-4">
                     <div className="w-16 h-16 bg-[var(--color-primary-100)] rounded-xl flex items-center justify-center group-hover:bg-[var(--color-primary-500)] transition-colors duration-300">
@@ -419,7 +421,7 @@ export default function Home() {
               </Card>
 
               {/* 4. Direito Empresarial */}
-              <Card variant="paper" padding="lg" className="hover-lift group fade-in-viewport"
+              <Card variant="paper" padding="lg" className="hover-lift group fade-in-viewport">
                 <CardContent>
                   <div className="flex items-start space-x-4">
                     <div className="w-16 h-16 bg-[var(--color-secondary-100)] rounded-xl flex items-center justify-center group-hover:bg-[var(--color-secondary-500)] transition-colors duration-300">
@@ -553,7 +555,7 @@ export default function Home() {
                     questions: [
                       {
                         question: "Além da área ambiental, vocês ajudam com contratos empresariais?",
-                        answer: "A Farias Klug presta assessoria jurídica contratual, abrangendo desde a elaboração de contratos de compra e venda, prestação de serviços, notificações extrajudiciais, até a assessoria para resolução de impasses contratuais ou negociais entre empresas ou particulares."
+                        answer: "A Farias Klug presta assessoria jurídica contratual, abrangendo desde a elaboração de contratos de compra e venda, prestação de serviços, notificações extrajudiciais, até a assessoria para resolução de impasses contratuais ou negociações entre empresas ou particulares."
                       }
                     ]
                   },
@@ -596,7 +598,7 @@ export default function Home() {
             </div>
 
             <div className="max-w-4xl mx-auto">
-              <Card variant="paper" padding="xl" className="hover-lift fade-in-viewport"
+              <Card variant="paper" padding="xl" className="hover-lift fade-in-viewport">
                 <CardContent>
                   <div className="flex flex-col md:flex-row items-start md:items-center space-y-6 md:space-y-0 md:space-x-8">
                     {/* Avatar/Photo Placeholder */}

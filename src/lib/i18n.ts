@@ -1,21 +1,22 @@
+import { locales } from '@/lib/locales';
 import { getRequestConfig } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 
-// Lista de idiomas suportados
-export const locales = ['pt-BR', 'en', 'es', 'de', 'fr'] as const;
-export type Locale = typeof locales[number];
-
-// Configuração do next-intl
+// next-intl request configuration
 export default getRequestConfig(async ({ locale }) => {
-  // Validar se o idioma é suportado
-  if (!locales.includes(locale as Locale)) notFound();
+  const supported = (locales as readonly string[]);
+  const currentLocale = supported.includes(String(locale)) ? String(locale) : 'pt-BR';
+
+  const common = (await import(`../../messages/${currentLocale}/common.json`)).default;
+  const home = (await import(`../../messages/${currentLocale}/home.json`)).default;
+  const seo = (await import(`../../messages/${currentLocale}/seo.json`)).default;
 
   return {
+    locale: currentLocale,
     messages: {
-      // Carregar as traduções para o idioma atual
-      ...(await import(`../../messages/${locale}/common.json`)).default,
-      ...(await import(`../../messages/${locale}/home.json`)).default,
-      ...(await import(`../../messages/${locale}/seo.json`)).default,
+      common,
+      home,
+      seo,
+      contact: common // expose contact under its own namespace if components use it
     }
   };
 });

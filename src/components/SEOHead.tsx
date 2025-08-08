@@ -1,14 +1,11 @@
-'use client';
+import { locales, type Locale } from '@/lib/locales';
+import { siteConfig } from '@/lib/seo';
 
-import { locales, siteConfig, type Locale } from '@/lib/seo';
-import { useLocale } from 'next-intl';
-
-export default function SEOHead() {
-  const locale = useLocale() as Locale;
+export default function SEOHead({ locale }: { locale: Locale }) {
   const baseUrl = siteConfig.url;
 
   // Generate hreflang tags
-  const hreflangTags = locales.map((loc) => {
+  const hreflangTags = (locales as readonly string[]).map((loc) => {
     const href = loc === 'pt-BR' ? baseUrl : `${baseUrl}/${loc}`;
     return (
       <link
@@ -35,10 +32,7 @@ export default function SEOHead() {
       {hreflangTags}
 
       {/* Canonical URL */}
-      <link
-        rel="canonical"
-        href={locale === 'pt-BR' ? baseUrl : `${baseUrl}/${locale}`}
-      />
+      <link rel="canonical" href={locale === 'pt-BR' ? baseUrl : `${baseUrl}/${locale}`} />
 
       {/* Language detection */}
       <meta name="language" content={locale} />

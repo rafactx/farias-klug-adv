@@ -1,23 +1,21 @@
-import { createSharedPathnamesNavigation } from 'next-intl/navigation';
+import { locales, type Locale } from '@/lib/locales';
+import { createNavigation } from 'next-intl/navigation';
 
-export const locales = ['pt-BR', 'en', 'es', 'de', 'fr'] as const;
-export type Locale = typeof locales[number];
-
-export const { Link, redirect, usePathname, useRouter } = createSharedPathnamesNavigation({
+export const { Link, redirect, usePathname, useRouter } = createNavigation({
   locales
 });
 
-// Utility function para obter URL localizada
+// Utility function to build a localized URL
 export function getLocalizedUrl(locale: string, pathname: string = '/') {
   return `/${locale}${pathname === '/' ? '' : pathname}`;
 }
 
-// Utility function para extrair locale da URL
+// Utility function to extract locale from URL
 export function getLocaleFromUrl(url: string): string {
   const segments = url.split('/');
   const potentialLocale = segments[1];
 
-  if (locales.includes(potentialLocale as Locale)) {
+  if ((locales as readonly string[]).includes(potentialLocale as Locale)) {
     return potentialLocale;
   }
 

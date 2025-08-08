@@ -135,7 +135,7 @@ export default function EnhancedHero() {
           className="flex flex-col items-center text-[var(--color-neutral-500)] hover:text-[var(--color-primary-500)] transition-colors duration-300"
           aria-label="Scroll para próxima seção"
         >
-          <Paragraph size="xs" className="mb-2 font-austera-medium">Role para baixo</Paragraph>
+          <Paragraph size="sm" className="mb-2 font-austera-medium">Role para baixo</Paragraph>
           <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>

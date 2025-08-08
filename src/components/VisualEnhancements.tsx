@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, type HTMLAttributes } from 'react';
 
 // Intersection Observer for scroll animations
 export function VisualEnhancements() {
@@ -34,8 +34,7 @@ export function VisualEnhancements() {
 export function EnhancedCard({ children, className = '', ...props }: {
   children: React.ReactNode;
   className?: string;
-  [key: string]: any;
-}) {
+} & HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={`hover-lift transition-all duration-300 ${className}`}
@@ -75,7 +74,7 @@ export function FloatingButton({
   const variantClasses = {
     primary: "bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-600)] text-white",
     secondary: "bg-[var(--color-secondary-500)] hover:bg-[var(--color-secondary-600)] text-white"
-  };
+  } as const;
 
   return (
     <button
@@ -119,7 +118,7 @@ export function BackgroundPattern({ pattern = 'dots', opacity = 0.05 }: {
         <div className="absolute bottom-20 right-10 w-24 h-24 border border-[var(--color-primary-500)] rounded-full animate-float animation-delay-600"></div>
       </div>
     )
-  };
+  } as const;
 
   return patterns[pattern];
 }

@@ -29,18 +29,22 @@ const headingVariants = cva(
   }
 );
 
+type NativeHeadingProps = Omit<React.HTMLAttributes<HTMLHeadingElement>, 'color'>;
+
+type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
 export interface HeadingProps
-  extends React.HTMLAttributes<HTMLHeadingElement>,
+  extends NativeHeadingProps,
     VariantProps<typeof headingVariants> {
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  as?: HeadingTag;
 }
 
 const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   ({ className, level, color, as, ...props }, ref) => {
-    const Component = as || `h${level}` as keyof JSX.IntrinsicElements;
+    const Tag: HeadingTag = as ?? (`h${level}` as HeadingTag);
 
     return (
-      <Component
+      <Tag
         ref={ref}
         className={cn(headingVariants({ level, color, className }))}
         {...props}
@@ -65,7 +69,8 @@ const paragraphVariants = cva(
       color: {
         default: "text-[var(--color-foreground)]",
         muted: "text-[var(--color-muted-foreground)]",
-        accent: "text-[var(--color-secondary-500)]"
+        accent: "text-[var(--color-secondary-500)]",
+        white: "text-white"
       }
     },
     defaultVariants: {
@@ -75,8 +80,10 @@ const paragraphVariants = cva(
   }
 );
 
+type NativeParagraphProps = Omit<React.HTMLAttributes<HTMLParagraphElement>, 'color'>;
+
 export interface ParagraphProps
-  extends React.HTMLAttributes<HTMLParagraphElement>,
+  extends NativeParagraphProps,
     VariantProps<typeof paragraphVariants> {}
 
 const Paragraph = React.forwardRef<HTMLParagraphElement, ParagraphProps>(
@@ -148,19 +155,12 @@ export interface EmphasisProps
   as?: 'span' | 'strong' | 'em' | 'mark' | 'blockquote';
 }
 
-const Emphasis = React.forwardRef<HTMLElement, EmphasisProps>(
-  ({ className, variant, as = 'span', ...props }, ref) => {
-    const Component = as as keyof JSX.IntrinsicElements;
-
-    return (
-      <Component
-        ref={ref}
-        className={cn(emphasisVariants({ variant, className }))}
-        {...props}
-      />
-    );
-  }
-);
+function Emphasis({ className, variant, as = 'span', ...props }: EmphasisProps) {
+  const Tag = as ?? 'span';
+  return (
+    <Tag className={cn(emphasisVariants({ variant, className }))} {...props} />
+  );
+}
 
 Emphasis.displayName = "Emphasis";
 
@@ -202,25 +202,20 @@ const textVariants = cva(
   }
 );
 
+type NativeTextProps = Omit<React.HTMLAttributes<HTMLSpanElement>, 'color'>;
+
 export interface TextProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
+  extends NativeTextProps,
     VariantProps<typeof textVariants> {
-  as?: keyof JSX.IntrinsicElements;
+  as?: 'span' | 'small' | 'strong' | 'em';
 }
 
-const Text = React.forwardRef<HTMLElement, TextProps>(
-  ({ className, size, weight, color, as = 'span', ...props }, ref) => {
-    const Component = as as keyof JSX.IntrinsicElements;
-
-    return (
-      <Component
-        ref={ref}
-        className={cn(textVariants({ size, weight, color, className }))}
-        {...props}
-      />
-    );
-  }
-);
+function Text({ className, size, weight, color, as = 'span', ...props }: TextProps) {
+  const Tag = as ?? 'span';
+  return (
+    <Tag className={cn(textVariants({ size, weight, color, className }))} {...props} />
+  );
+}
 
 Text.displayName = "Text";
 

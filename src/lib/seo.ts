@@ -1,8 +1,5 @@
+import type { Locale } from '@/lib/locales';
 import { Metadata } from 'next';
-
-// Define the available locales and their configurations
-export const locales = ['pt-BR', 'en', 'es', 'de', 'fr'] as const;
-export type Locale = (typeof locales)[number];
 
 // Base domain configuration
 export const siteConfig = {
@@ -218,7 +215,7 @@ export const seoContent = {
       }
     }
   }
-};
+} as const;
 
 // Generate metadata for each locale
 export function generateSEOMetadata(locale: Locale): Metadata {

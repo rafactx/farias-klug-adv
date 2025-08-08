@@ -1,21 +1,17 @@
 import createMiddleware from 'next-intl/middleware';
+import { locales } from './src/lib/locales';
 
 export default createMiddleware({
-  // Lista de todos os idiomas suportados
-  locales: ['pt-BR', 'en', 'es', 'de', 'fr'],
-
-  // Idioma padrão (fallback)
+  locales,
   defaultLocale: 'pt-BR',
-
-  // Detecção automática de idioma baseada no navegador
   localeDetection: true,
-
-  // URLs localizadas (ex: /en/about, /pt-BR/sobre)
-  localePrefix: 'as-needed'
+  localePrefix: 'always'
 });
 
 export const config = {
-  // Matcher que define quais rotas devem passar pelo middleware
-  // Exclui api routes, _next (assets internos) e arquivos estáticos
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+  matcher: [
+    '/',
+    '/(pt-BR|en|es|de|fr)/:path*',
+    '/((?!api|_next|_vercel|.*\\..*).*)'
+  ]
 };

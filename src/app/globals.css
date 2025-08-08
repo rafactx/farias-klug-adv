@@ -1,4 +1,4 @@
-@import '@tailwindcss/postcss';
+@import "tailwindcss";
 
 /* Austera Text Font Family */
 @font-face {

@@ -1,11 +1,12 @@
-import { locales, siteConfig } from '@/lib/seo';
+import { locales } from '@/lib/locales';
+import { siteConfig } from '@/lib/seo';
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
 
   // Generate sitemap entries for each locale
-  const routes = locales.flatMap((locale) => {
+  const routes = (locales as readonly string[]).flatMap((locale) => {
     const localePrefix = locale === 'pt-BR' ? '' : `/${locale}`;
 
     return [
@@ -17,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 1.0,
         alternates: {
           languages: Object.fromEntries(
-            locales.map((loc) => [
+            (locales as readonly string[]).map((loc) => [
               loc,
               loc === 'pt-BR' ? baseUrl : `${baseUrl}/${loc}`
             ])
@@ -32,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
         alternates: {
           languages: Object.fromEntries(
-            locales.map((loc) => [
+            (locales as readonly string[]).map((loc) => [
               loc,
               loc === 'pt-BR' ? `${baseUrl}#about` : `${baseUrl}/${loc}#about`
             ])
@@ -47,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.9,
         alternates: {
           languages: Object.fromEntries(
-            locales.map((loc) => [
+            (locales as readonly string[]).map((loc) => [
               loc,
               loc === 'pt-BR' ? `${baseUrl}#services` : `${baseUrl}/${loc}#services`
             ])
@@ -62,7 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.7,
         alternates: {
           languages: Object.fromEntries(
-            locales.map((loc) => [
+            (locales as readonly string[]).map((loc) => [
               loc,
               loc === 'pt-BR' ? `${baseUrl}#team` : `${baseUrl}/${loc}#team`
             ])
@@ -77,7 +78,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.6,
         alternates: {
           languages: Object.fromEntries(
-            locales.map((loc) => [
+            (locales as readonly string[]).map((loc) => [
               loc,
               loc === 'pt-BR' ? `${baseUrl}#faq` : `${baseUrl}/${loc}#faq`
             ])
@@ -92,7 +93,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
         alternates: {
           languages: Object.fromEntries(
-            locales.map((loc) => [
+            (locales as readonly string[]).map((loc) => [
               loc,
               loc === 'pt-BR' ? `${baseUrl}#contact` : `${baseUrl}/${loc}#contact`
             ])

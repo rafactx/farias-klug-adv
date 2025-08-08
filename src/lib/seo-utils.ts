@@ -1,4 +1,5 @@
-import { type Locale, siteConfig } from './seo';
+import { type Locale } from '@/lib/locales';
+import { siteConfig } from './seo';
 
 // Generate URL for specific locale and path
 export function generateLocalizedUrl(locale: Locale, path: string = ''): string {
@@ -124,7 +125,7 @@ export function generateMetaTags(data: {
     'twitter:title': data.title,
     'twitter:description': data.description,
     'twitter:image': data.ogImage || `${siteConfig.url}/og-image.jpg`,
-  };
+  } as Record<string, string>;
 
   if (data.keywords && data.keywords.length > 0) {
     tags['keywords'] = data.keywords.join(', ');

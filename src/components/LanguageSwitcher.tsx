@@ -1,5 +1,7 @@
 'use client';
 
+import { locales as supportedLocales } from '@/lib/locales';
+import type { Route } from 'next';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -10,7 +12,7 @@ const locales = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
-];
+] as const;
 
 export default function LanguageSwitcher() {
   const t = useTranslations('common.language');
@@ -22,15 +24,15 @@ export default function LanguageSwitcher() {
   const currentLocale = locales.find(l => l.code === locale);
 
   const handleLanguageChange = (newLocale: string) => {
-    // Remove o idioma atual do pathname e adiciona o novo
+    // Remove the current locale from the pathname and insert the new one
     const segments = pathname.split('/');
-    if (locales.some(l => l.code === segments[1])) {
+    if ((supportedLocales as readonly string[]).includes(segments[1] as string)) {
       segments[1] = newLocale;
     } else {
       segments.splice(1, 0, newLocale);
     }
 
-    const newPath = segments.join('/');
+    const newPath = segments.join('/') as Route;
     router.push(newPath);
     setIsOpen(false);
   };

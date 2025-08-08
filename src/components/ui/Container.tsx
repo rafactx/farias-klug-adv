@@ -30,16 +30,12 @@ const containerVariants = cva(
 
 export interface ContainerProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof containerVariants> {
-  as?: keyof JSX.IntrinsicElements;
-}
+    VariantProps<typeof containerVariants> {}
 
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
-  ({ className, size, padding, as = 'div', ...props }, ref) => {
-    const Component = as as keyof JSX.IntrinsicElements;
-
+  ({ className, size, padding, ...props }, ref) => {
     return (
-      <Component
+      <div
         ref={ref}
         className={cn(containerVariants({ size, padding, className }))}
         {...props}

@@ -24,8 +24,10 @@ const inputVariants = cva(
   }
 );
 
+type NativeInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>;
+
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
+  extends NativeInputProps,
     VariantProps<typeof inputVariants> {
   label?: string;
   error?: string;
